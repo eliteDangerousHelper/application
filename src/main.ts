@@ -1,7 +1,9 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import Element from "./plugins/element";
 
-import 'normalize.css';
+import "normalize.css";
 
 createApp(App)
-  .mount("#app");
+.use(Element.ElementPlus, Element.options)
+.mount("#app");

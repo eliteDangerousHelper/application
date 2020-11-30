@@ -1,5 +1,4 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
   <HelloWorld v-if="journal !== undefined" msg="Welcome to Your Vue.js + TypeScript App" />
   <Loader v-else></Loader>
 </template>
@@ -38,7 +37,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   background-image: url("./assets/background.jpg");
   overflow: auto;
 }
