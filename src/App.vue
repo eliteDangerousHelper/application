@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld v-if="loaded" msg="Welcome to Your Vue.js + TypeScript App" />
+  <HelloWorld v-if="journal !== undefined" msg="Welcome to Your Vue.js + TypeScript App" />
   <Loader v-else></Loader>
 </template>
 
@@ -8,7 +8,7 @@
 import { computed, defineComponent, ref, watch } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
 import Loader from "./components/Loader.vue";
-import store from "./store";
+import store from "./store/game";
 
 export default defineComponent({
   name: "App",
@@ -17,11 +17,10 @@ export default defineComponent({
     Loader
   },
   setup() {
-    const loaded = computed(() => store.state.GameStore.journal !== undefined);
-    console.log(loaded.value);
+    const journal = computed(() => store.state.journal);
 
     return {
-      loaded
+      journal
     };
   }
 });
