@@ -20,7 +20,7 @@ export default defineComponent({
     const ranks = computed(() => store.state);
     return {
       ranks
-    }
+    };
   },
   components: {
     Rank

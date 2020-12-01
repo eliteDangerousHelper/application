@@ -4,9 +4,9 @@
     <div class="info">
       <h1>{{ state.name }}</h1>
       <p>
-        Rang: {{ state.level }}<br>
+        Rang: {{ state.level }}<br />
         Avancement: {{ state.percent }}
-        </p>
+      </p>
     </div>
   </div>
 </template>
@@ -18,11 +18,14 @@ import { Rank } from "../store/ranks";
 export default defineComponent({
   name: "Rank",
   props: {
-    state: Object as PropType<Rank>
+    state: {
+      type: Object as PropType<Rank>,
+      require: true
+    }
   },
   setup(props) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const icon = ref(require(`../assets/ranks/${props.state!.icon}.png`));
+    const icon = ref(require(`../assets/ranks/${props.state?.icon}.png`));
     return {
       icon
     };

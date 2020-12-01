@@ -18,41 +18,41 @@ export interface RanksState {
 
 const state: RanksState = reactive({
   Combat: {
-    name: 'Combat',
-    icon: 'Combat',
+    name: "Combat",
+    icon: "Combat",
     percent: 0,
     level: 0
   },
   Trade: {
-    name: 'Trade',
-    icon: 'Trade',
+    name: "Trade",
+    icon: "Trade",
     percent: 0,
     level: 0
   },
   Explore: {
-    name: 'Explore',
-    icon: 'Explore',
+    name: "Explore",
+    icon: "Explore",
     percent: 0,
     level: 0
   },
   Empire: {
-    name: 'Empire',
-    icon: 'Empire',
+    name: "Empire",
+    icon: "Empire",
     percent: 0,
     level: 0
   },
   Federation: {
-    name: 'Federation',
-    icon: 'Federation',
+    name: "Federation",
+    icon: "Federation",
     percent: 0,
     level: 0
   },
   CQC: {
-    name: 'CQC',
-    icon: 'CQC',
+    name: "CQC",
+    icon: "CQC",
     percent: 0,
     level: 0
-  },
+  }
 });
 
 export default { state };
