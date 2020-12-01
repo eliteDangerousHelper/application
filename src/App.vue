@@ -1,19 +1,22 @@
 <template>
-  <HelloWorld v-if="journal !== undefined" msg="Welcome to Your Vue.js + TypeScript App" />
+  <!-- <div v-if="journal !== undefined" /> -->
+  <div v-if="true">
+    <Ranks></Ranks>
+  </div>
   <Loader v-else></Loader>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import { computed, defineComponent } from "vue";
 import Loader from "./components/Loader.vue";
+import Ranks from "./components/Ranks.vue";
 import store from "./store/game";
 
 export default defineComponent({
   name: "App",
   components: {
-    HelloWorld,
-    Loader
+    Loader,
+    Ranks
   },
   setup() {
     const journal = computed(() => store.state.journal);
