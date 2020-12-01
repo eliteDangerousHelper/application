@@ -1,12 +1,9 @@
 <template>
-  <div class="ranks">
-    <Rank
-      v-for="rank in ranks"
-      :key="rank.name"
-      :type="index"
-      :state="rank"
-    ></Rank>
-  </div>
+  <el-row :gutter="20">
+    <el-col :span="4" v-for="(rank, index) in ranks" :key="rank.name">
+      <Rank :type="index" :state="rank" />
+    </el-col>
+  </el-row>
 </template>
 
 <script lang="ts">

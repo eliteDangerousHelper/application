@@ -28,7 +28,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style lang="scss">
 html,
 body {
   height: 100%;
@@ -42,5 +42,14 @@ body {
   text-align: center;
   background-image: url("./assets/background.jpg");
   overflow: auto;
+}
+
+.el-card {
+  border: 1px solid rgba(41, 41, 41, 0.95);
+
+  .el-card__body {
+    background-color: rgba(41, 41, 41, 0.95);
+    color: #eee;
+  }
 }
 </style>
