@@ -1,10 +1,9 @@
 import { Stats } from "fs";
 import { FSWatcher } from "chokidar";
+import { once } from "events";
 
 const remote = window.require("electron").remote;
 const fs = remote.require("fs");
-const readline = remote.require("readline");
-const Stream = remote.require("stream");
 const regexJournal = /Journal.*\.log/;
 
 interface FileInfo {
@@ -12,32 +11,31 @@ interface FileInfo {
   stat: Stats;
 }
 
-const getLastLine = (path: string): Promise<string | undefined> => {
-  const inStream = fs.createReadStream(path);
-  const outStream = new Stream();
-  return new Promise((resolve, reject) => {
-    const rl = readline.createInterface(inStream, outStream);
+const getLines = (path: string): string[] => {
+  const data: string = fs.readFileSync(path, 'UTF-8');
+  
+  return data.split(/\r?\n/);
+}
 
-    let lastLine: string | undefined = undefined;
-    rl.on("line", function(line: string) {
-      if (line.length >= 1) {
-        lastLine = line;
-      }
-    });
+const getLastLine = (path: string): string | undefined => {
+  const lines = getLines(path);
+  let lastLine = undefined;
 
-    rl.on("error", () => {
-      console.log("Erreur");
-      reject();
-    });
+  if (lines.length) {
+    do {
+      lastLine = lines.pop();
+    } while (lastLine === "");
+  }
 
-    rl.on("close", function() {
-      resolve(lastLine);
-    });
-  });
+  console.log(lastLine);
+
+  return lastLine;
 };
 
-export const checkJournal = async (path: string) => {
-  const lastLine = await getLastLine(path);
+export const checkJournal = (path: string) => {
+  console.log('checkJournal');
+  
+  const lastLine = getLastLine(path);
 
   return !(lastLine === undefined || JSON.parse(lastLine).event === "Shutdown");
 };
@@ -51,8 +49,11 @@ export const watchNewJournal = (folder: string): FSWatcher => {
 
   return watcher
     .on("add", (path: string) => {
+      console.log(`File ${path} has been added`);
+      
       if (!path.match(regexJournal)) {
         watcher.unwatch(path);
+        console.log(`File ${path} has been unwatch`);
       }
     })
     .on("delete", (path: string) => watcher.unwatch(path));
@@ -75,7 +76,7 @@ export const searchJournal = async (
 
   if (files.length) {
     journal = files[0].name;
-    if (!(await checkJournal(folder + journal))) {
+    if (!(checkJournal(folder + journal))) {
       journal = undefined;
     }
   }

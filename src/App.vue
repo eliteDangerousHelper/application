@@ -1,6 +1,6 @@
 <template>
-  <!-- <div v-if="journal !== undefined" /> -->
-  <div v-if="true">
+  <!-- <div v-if="true"> -->
+  <div v-if="journal !== undefined">
     <Ranks></Ranks>
   </div>
   <Loader v-else></Loader>

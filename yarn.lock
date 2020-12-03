@@ -6596,7 +6596,7 @@ mute-stream@0.0.8:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
-mz@^2.4.0:
+mz@^2.4.0, mz@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/mz/-/mz-2.7.0.tgz#95008057a56cafadc2bc63dde7f9ff6955948e32"
   integrity sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==
@@ -7903,6 +7903,18 @@ read-config-file@6.0.0:
     js-yaml "^3.13.1"
     json5 "^2.1.2"
     lazy-val "^1.0.4"
+
+read-last-lines-ts@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/read-last-lines-ts/-/read-last-lines-ts-1.1.0.tgz#bbc1a3c9dab796e7abdff22c42732d0a565261f8"
+  integrity sha512-HKJpXOO2rxmjnuewsmIZ1NK/NfcjAr4CXrTregEC1dGERhtYcYStR6OpgPSpcWBaasqfK0UznN2hpLX4eHDpaw==
+
+read-last-lines@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/read-last-lines/-/read-last-lines-1.7.2.tgz#d96d40566d70aca260a85acefb00d523ea3e74ad"
+  integrity sha512-K0yUvTYAYn6qpyLJufaJ7yC6BeL23qpgZ8SKM7/fA1R1rHotCDxB/zDp9i1I2JHvexWBW6/35jkt07iiIKKp4g==
+  dependencies:
+    mz "^2.7.0"
 
 read-pkg@^5.1.1:
   version "5.2.0"
