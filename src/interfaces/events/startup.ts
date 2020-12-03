@@ -7,6 +7,9 @@ export interface Heading extends EventED {
   build: string;
 }
 
+export interface Shutdown extends EventED {
+}
+
 export interface ClearSavedGame extends EventED {
   Name: string;
 }

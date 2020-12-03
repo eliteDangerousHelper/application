@@ -3,7 +3,9 @@ import * as startup from "./events/startup";
 
 const eventFunction: {[name: string]: Function} = {
   "FileHeader": startup.fileheader,
-  "Progress": startup.progress
+  "Progress": startup.progress,
+  "Shutdown": startup.shutdown,
+  "Rank": startup.rank
 }
 
 export const parse = (event: EventED) => {

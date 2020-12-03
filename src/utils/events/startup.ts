@@ -1,8 +1,13 @@
-import { Heading, Progress, Rank } from '@/interfaces/events/startup';
+import { Heading, Progress, Rank, Shutdown } from '@/interfaces/events/startup';
 import rankStore from "@/store/ranks";
+import gameStore from "@/store/game";
 
 export const fileheader = (event: Heading) => {
   console.log('fileheader :', event);
+}
+
+export const shutdown = (event: Shutdown) => {
+  gameStore.state.journal = undefined
 }
 
 export const progress = (event: Progress) => {
