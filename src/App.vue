@@ -1,7 +1,11 @@
 <template>
   <!-- <div v-if="true"> -->
   <div v-if="journal !== undefined">
-    <Ranks></Ranks>
+    <el-container>
+      <el-main>
+        <Ranks></Ranks>
+      </el-main>
+    </el-container>
   </div>
   <Loader v-else></Loader>
 </template>
