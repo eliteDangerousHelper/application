@@ -1,12 +1,9 @@
 <template>
   <el-card :body-style="{ padding: '0px' }" class="rank">
-    <h1>{{ state.name }}</h1>
-    <div class="test">
-      <img :src="icon" class="image hidden-md-only" />
-      <div class="info">
-        <el-progress width="70" type="dashboard" :text-inside="true" :stroke-width="12" :percentage="state.percent"></el-progress>
-        {{ rankName }}
-      </div>
+    <el-image :src="icon" class="image hidden-md-only" fit="contain" />
+    <div class="info">
+      <el-progress width="40" type="dashboard" :text-inside="true" :stroke-width="6" :percentage="state.percent"></el-progress>
+      {{ rankName }}
     </div>
   </el-card>
 </template>
@@ -72,24 +69,12 @@ export default defineComponent({
       display: flex;
       align-items: center;
       justify-content: space-around;
-      flex-direction: column;
-
-      .test {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-      }
-
-      img {
-        width: 30%;
-      }
     }
   }
 }
 
 .image {
-  // width: 100%;
-  display: block;
+  max-height: 70px;
 }
 
 .info {
