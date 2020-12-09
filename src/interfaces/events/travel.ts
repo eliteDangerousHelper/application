@@ -1,15 +1,66 @@
 import { EventED } from './base';
 
+interface StationEconomie {
+  Name: string;
+  Name_Localised: string;
+  Proportion: number;
+}
+
+interface RecoveringState {
+  State: string;
+  Trend: number;
+}
+
+interface ActiveState{
+  State: string;
+}
+
+interface Faction {
+  Name: string;
+  FactionState: string;
+  Government: string;
+  Influence: number;
+  Allegiance: string;
+  Happiness: string;
+  Happiness_Localised: string;
+  MyReputation: number;
+  RecoveringStates?: RecoveringState[];
+  ActiveStates?: ActiveState[];
+  SquadronFaction?: boolean,
+  HomeSystem?: boolean,
+}
+
+interface Conflict {
+  WarType: string;
+  Status: string;
+  Faction1: {
+    Name: string;
+    Stake: string;
+    WonDays: number;
+  },
+  Faction2: {
+    Name: string;
+    Stake: string;
+    WonDays: number;
+  }
+}
+
 export interface Docked extends EventED {
   StationName: string;
   StationType: string;
   StarSystem: string;
-  Faction: string;
-  FactionState: string;
-  Allegiance: string;
-  Economy: string;
-  Government: string;
-  Security: string;
+  StationFaction: Faction;
+  StationAllegiance: string;
+  StationEconomy: string;
+  StationEconomy_Localised: string;
+  StationGovernment: string;
+  StationGovernment_Localised: string;
+  StationSecurity: string;
+  StationServices: string[];
+  StationEconomies: StationEconomie[]
+  DistFromStarLS: number;
+  MarketID: number;
+  SystemAddress: number;
 }
 
 export interface DockingCancelled extends EventED {
@@ -36,18 +87,24 @@ export interface DockingTimeout extends EventED {
 
 export interface FSDJump extends EventED {
   StarSystem: string;
-  StarPos: string;
+  SystemAddress: number;
+  StarPos: number[];
+  SystemAllegiance: string;
+  SystemEconomy: string;
+  SystemEconomy_Localised: string;
+  SystemSecondEconomy: string;
+  SystemSecondEconomy_Localised: string;
+  SystemGovernment: string;
+  SystemGovernment_Localised: string;
+  SystemSecurity: string;
+  SystemSecurity_Localised: string;
+  Population: number;
   Body: string;
+  BodyID: number;
+  BodyType: string;
   JumpDist: number;
   FuelUsed: number;
   FuelLevel: number;
-  BoostUsed: number;
-  Faction: string;
-  FactionState: string;
-  Allegiance: string;
-  Economy: string;
-  Government: string;
-  Security: string;
 }
 
 export interface Liftoff extends EventED {
@@ -56,19 +113,42 @@ export interface Liftoff extends EventED {
 }
 
 export interface Location extends EventED {
-  StarSystem: string;
-  StarPos: object;
-  Body: string;
-  BodyType: string;
   Docked: boolean;
-  StationName?: string;
-  StationType?: string;
-  Faction: string;
-  FactionState: string;
-  Allegiance: string;
-  Economy: string;
-  Government: string;
-  Security: string;
+  StationName: string;
+  StationType: string;
+  MarketID: number;
+  StationFaction: {
+    Name: string;
+    FactionState: string;
+  },
+  StationGovernment: string,
+  StationGovernment_Localised: string,
+  StationServices: string[];
+  StationEconomy: string;
+  StationEconomy_Localised: string;
+  StationEconomies: StationEconomie[];
+  StarSystem: string;
+  SystemAddress: number;
+  StarPos: number[];
+  SystemAllegiance: string;
+  SystemEconomy: string;
+  SystemEconomy_Localised: string;
+  SystemSecondEconomy: string;
+  SystemSecondEconomy_Localised: string;
+  SystemGovernment: string;
+  SystemGovernment_Localised: string;
+  SystemSecurity: string;
+  SystemSecurity_Localised: string;
+  Population: number;
+  Body: string;
+  BodyID: number;
+  BodyType: string;
+  Factions: Faction[];
+  SystemFaction: {
+    Name: string;
+    FactionState: string;
+  },
+  Conflicts: Conflict[];
 }
 
 export interface SupercruiseEntry extends EventED {

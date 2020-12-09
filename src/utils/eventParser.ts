@@ -1,11 +1,20 @@
 import { EventED } from '@/interfaces/events/base';
 import * as startup from "./events/startup";
+import * as travel from "./events/travel";
 
 const eventFunction: {[name: string]: Function} = {
   "FileHeader": startup.fileheader,
   "Progress": startup.progress,
   "Shutdown": startup.shutdown,
-  "Rank": startup.rank
+  "Rank": startup.rank,
+  "LoadGame": startup.loadGame,
+  "Commander": startup.commander,
+  "Reputation": startup.reputation,
+  "EngineerProgress": startup.engineerProgress,
+  "SquadronStartup": startup.squadronStartup,
+  "Location": travel.location,
+  "FSDJump": travel.fsdJump,
+  "Docked": travel.docked,
 }
 
 export const parse = (event: EventED) => {

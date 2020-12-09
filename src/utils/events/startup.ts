@@ -1,9 +1,93 @@
-import { Heading, Progress, Rank, Shutdown } from '@/interfaces/events/startup';
+import { Commander, Engineer, EngineerProgress, Heading, LoadGame, Missions, Progress, Rank, Reputation, Shutdown, SquadronStartup } from '@/interfaces/events/startup';
 import rankStore from "@/store/ranks";
 import gameStore from "@/store/game";
+import commanderStore from "@/store/commander";
+import shipStore from "@/store/ship";
+import missionsStore from "@/store/missions";
 
 export const fileheader = (event: Heading) => {
   console.log('fileheader :', event);
+}
+
+export const commander = (event: Commander) => {
+  commanderStore.state.name = event.Name
+  commanderStore.state.fid = event.FID
+}
+
+export const loadGame = (event: LoadGame) => {
+  commanderStore.state.fid = event.FID;
+  commanderStore.state.name = event.Commander;
+  commanderStore.state.credit = event.Credits;
+  commanderStore.state.loan = event.Loan;
+  
+  gameStore.state.horizons = event.Horizons;
+  gameStore.state.group = event.Group === "" ? undefined : event.Group;
+  gameStore.state.mode = event.GameMode;
+
+  shipStore.state.name = event.ShipName;
+  shipStore.state.id = event.ShipID;
+  shipStore.state.type = event.Ship_Localised;
+  shipStore.state.indent = event.ShipIdent;
+  shipStore.state.fuel.capacity = event.FuelCapacity;
+  shipStore.state.fuel.level = event.FuelLevel;
+}
+
+export const reputation = (event: Reputation) => {
+  commanderStore.state.reputation.empire = event.Empire
+  commanderStore.state.reputation.federation = event.Federation
+}
+
+export const missions = (event: Missions) => {
+  event.Active.forEach(mission => {
+    missionsStore.state.active.push({
+      id: mission.MissionID,
+      name: mission.Name,
+      expires: mission.Expires,
+      passengerMission: mission.PassengerMission
+    })
+  })
+  
+  event.Complete.forEach(mission => {
+    missionsStore.state.complete.push({
+      id: mission.MissionID,
+      name: mission.Name,
+      expires: mission.Expires,
+      passengerMission: mission.PassengerMission
+    })
+  })
+
+  event.Failed.forEach(mission => {
+    missionsStore.state.failed.push({
+      id: mission.MissionID,
+      name: mission.Name,
+      expires: mission.Expires,
+      passengerMission: mission.PassengerMission
+    })
+  })
+}
+
+export const engineerProgress = (event: EngineerProgress) => {
+  event.Engineers.forEach((enginner: Engineer) => {
+    const engExist = commanderStore.state.engineers.filter((eng) => eng.id === enginner.EngineerID).length != 0;
+
+    if (engExist) {
+      commanderStore.state.engineers.filter((eng) => eng.id === enginner.EngineerID)[0].name = enginner.Engineer;
+      commanderStore.state.engineers.filter((eng) => eng.id === enginner.EngineerID)[0].progress = enginner.Progress;
+    } else {
+      commanderStore.state.engineers.push({
+        name: enginner.Engineer,
+        id: enginner.EngineerID,
+        progress: enginner.Progress
+      })
+    }
+  })
+}
+
+export const squadronStartup = (event: SquadronStartup) => {
+  commanderStore.state.squadron = {
+    name: event.SquadronName,
+    rank: event.CurrentRank,
+  }
 }
 
 export const shutdown = (event: Shutdown) => {
