@@ -4,10 +4,19 @@
     <el-container>
       <el-main>
         <Ranks></Ranks>
-        <el-row style="margin-top: 10px;">
-          <el-column>
+        <el-row style="margin-top: 10px;" :gutter="20" type="flex">
+          <el-col :span="span">
+            <Commander></Commander>
+          </el-col>
+          <el-col :span="span">
             <System></System>
-          </el-column>
+          </el-col>
+          <el-col :span="span" v-if="dockedStation">
+            <DockedStation></DockedStation>
+          </el-col>
+          <el-col :span="span">
+            <Ship></Ship>
+          </el-col>
         </el-row>
       </el-main>
     </el-container>
@@ -16,24 +25,39 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import Loader from "./components/Loader.vue";
 import System from "./components/System.vue";
+import Ship from "./components/Ship.vue";
+import DockedStation from "./components/DockedStation.vue";
+import Commander from "./components/Commander.vue";
 import Ranks from "./components/Ranks.vue";
 import store from "./store/game";
+import systemStore from "./store/system";
 
 export default defineComponent({
   name: "App",
   components: {
     Loader,
     Ranks,
-    System
+    System,
+    Ship,
+    DockedStation,
+    Commander
   },
   setup() {
     const journal = computed(() => store.state.journal);
+    const dockedStation = ref(systemStore.state.dockedStation !== undefined);
+    const span = ref(8);
+
+    if (dockedStation.value) {
+      span.value = 6;
+    }
 
     return {
-      journal
+      journal,
+      span,
+      dockedStation
     };
   }
 });
@@ -62,6 +86,10 @@ body {
   .el-card__body {
     background-color: rgba(41, 41, 41, 0.95);
     color: #eee;
+  }
+
+  .el-card__body {
+    height: 100%;
   }
 }
 </style>

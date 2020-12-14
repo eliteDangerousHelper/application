@@ -1,5 +1,5 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }">
+  <el-card>
     <template #header>
       <div class="clearfix">
         <span>Système: {{ system.name }}</span>
@@ -26,11 +26,3 @@ export default defineComponent({
   }
 });
 </script>
-
-<style scoped>
-.ranks {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-}
-</style>

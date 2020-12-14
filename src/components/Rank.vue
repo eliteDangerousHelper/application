@@ -1,8 +1,19 @@
 <template>
   <el-card :body-style="{ padding: '0px' }" class="rank">
-    <el-image :src="icon" class="image hidden-md-only" fit="contain" />
+    <el-image
+      :src="icon"
+      class="image hidden-md-only"
+      fit="contain"
+      :title="name"
+    />
     <div class="info">
-      <el-progress width="40" type="dashboard" :text-inside="true" :stroke-width="6" :percentage="state.percent"></el-progress>
+      <el-progress
+        width="40"
+        type="dashboard"
+        :text-inside="true"
+        :stroke-width="6"
+        :percentage="state.percent"
+      ></el-progress>
       {{ rankName }}
     </div>
   </el-card>
@@ -17,7 +28,7 @@ import {
   federationRanks,
   tradeRanks
 } from "@/utils/idConverter";
-import { defineComponent, PropType, ref } from "vue";
+import { computed, defineComponent, PropType, ref } from "vue";
 import { Rank } from "../store/ranks";
 
 export default defineComponent({
@@ -31,6 +42,7 @@ export default defineComponent({
   setup(props) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const icon = ref(require(`../assets/ranks/${props.state?.icon}.png`));
+    const name = computed(() => props.state?.name);
 
     const rankName = ref("");
     switch (props.state?.name) {
@@ -56,7 +68,8 @@ export default defineComponent({
 
     return {
       icon,
-      rankName
+      rankName,
+      name
     };
   }
 });
