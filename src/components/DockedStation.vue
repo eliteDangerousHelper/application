@@ -2,7 +2,9 @@
   <el-card>
     <template #header>
       <div class="clearfix">
-        <span>Station: {{ station.name }}</span>
+        <span
+          >{{ t("components.dockedStation.station") }}: {{ station.name }}</span
+        >
       </div>
     </template>
     <div>
@@ -16,22 +18,32 @@
         {{ service }}
       </el-tag>
     </div>
-    <div>Gouvernement: {{ station.government }}</div>
-    <div>Economie: {{ station.economy }}</div>
-    <div>Faction dirigente: {{ station.faction.name }}</div>
+    <div>
+      {{ t("components.dockedStation.government") }}: {{ station.government }}
+    </div>
+    <div>
+      {{ t("components.dockedStation.economy") }}: {{ station.economy }}
+    </div>
+    <div>
+      {{ t("components.dockedStation.leadingFaction") }}:
+      {{ station.faction.name }}
+    </div>
   </el-card>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import systemStore from "@/store/system";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "DockedStation",
   setup() {
     const station = computed(() => systemStore.state.dockedStation);
+    const { t } = useI18n();
     return {
-      station
+      station,
+      t
     };
   }
 });

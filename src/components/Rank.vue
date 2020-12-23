@@ -20,15 +20,8 @@
 </template>
 
 <script lang="ts">
-import {
-  combatRanks,
-  cqcRanks,
-  empireRanks,
-  explorationRanks,
-  federationRanks,
-  tradeRanks
-} from "@/utils/idConverter";
 import { computed, defineComponent, PropType, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { Rank } from "../store/ranks";
 
 export default defineComponent({
@@ -43,26 +36,27 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const icon = ref(require(`../assets/ranks/${props.state?.icon}.png`));
     const name = computed(() => props.state?.name);
+    const { t } = useI18n();
 
     const rankName = ref("");
     switch (props.state?.name) {
       case "Combat":
-        rankName.value = combatRanks(props.state.level);
+        rankName.value = t("ranks.combat." + props.state.level);
         break;
       case "Trade":
-        rankName.value = tradeRanks(props.state.level);
+        rankName.value = t("ranks.trade." + props.state.level);
         break;
       case "Explore":
-        rankName.value = explorationRanks(props.state.level);
+        rankName.value = t("ranks.explore." + props.state.level);
         break;
       case "Empire":
-        rankName.value = empireRanks(props.state.level);
+        rankName.value = t("ranks.empire." + props.state.level);
         break;
       case "Federation":
-        rankName.value = federationRanks(props.state.level);
+        rankName.value = t("ranks.federation." + props.state.level);
         break;
       case "CQC":
-        rankName.value = cqcRanks(props.state.level);
+        rankName.value = t("ranks.cqc." + props.state.level);
         break;
     }
 

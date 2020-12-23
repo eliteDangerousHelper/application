@@ -2,13 +2,16 @@
   <el-card>
     <template #header>
       <div class="clearfix">
-        <span>Commandant {{ commander.name }}</span>
+        <span>
+          {{ t("components.commander.commander") }}: {{ commander.name }}
+        </span>
       </div>
     </template>
-    <div>Crédit: {{ commander.credit }}</div>
-    <div>Emprunt: {{ commander.loan }}</div>
+    <div>{{ t("components.commander.credit") }}: {{ commander.credit }}</div>
+    <div>{{ t("components.commander.loan") }}: {{ commander.loan }}</div>
     <div v-if="commander.squadron">
-      Squadron: {{ commander.squadron.name }} (rang:
+      {{ t("components.commander.squadron") }}:
+      {{ commander.squadron.name }} ({{ t("components.commander.rank") }}:
       {{ commander.squadron.rank }})
     </div>
     <div>
@@ -40,13 +43,17 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import commanderStore from "@/store/commander";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "Commander",
   setup() {
     const commander = computed(() => commanderStore.state);
+    const { t } = useI18n();
+
     return {
-      commander
+      commander,
+      t
     };
   }
 });
