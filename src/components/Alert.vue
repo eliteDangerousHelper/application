@@ -1,14 +1,7 @@
 <template>
-  <el-card>
-    <template #header>
-      <div class="clearfix">
-        <span>
-          {{ alert.title }}
-        </span>
-      </div>
-    </template>
+  <div class="window alert">
     <div>{{ alert.message }}</div>
-  </el-card>
+  </div>
 </template>
 
 <script lang="ts">

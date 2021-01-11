@@ -2,20 +2,10 @@
   <div v-if="true">
   <!-- <div v-if="journal !== undefined"> -->
     <el-container>
-      <el-header>
-        <Ranks></Ranks>
-      </el-header>
       <el-main>
         <el-row style="margin-top: 10px;" :gutter="20" type="flex">
-          <el-col :span="20">
-            <Commander></Commander>
-          </el-col>
-          <el-col :span="4">
-            <Alert></Alert>
-          </el-col>
+          <Ranks></Ranks>
         </el-row>
-      </el-main>
-      <el-footer>
         <el-row style="margin-top: 10px;" :gutter="20" type="flex">
           <el-col :span="span">
             <Commander></Commander>
@@ -26,11 +16,17 @@
           <el-col :span="span" v-if="dockedStation">
             <DockedStation></DockedStation>
           </el-col>
+          <el-col :span="span" v-if="dockedStation">
+            <DockedStationServices></DockedStationServices>
+          </el-col>
           <el-col :span="span">
             <Ship></Ship>
           </el-col>
+          <el-col :span="span">
+            <Alert></Alert>
+          </el-col>
         </el-row>
-      </el-footer>
+      </el-main>
     </el-container>
   </div>
   <Loader v-else></Loader>
@@ -42,6 +38,7 @@ import Loader from "./components/Loader.vue";
 import System from "./components/System.vue";
 import Ship from "./components/Ship.vue";
 import DockedStation from "./components/DockedStation.vue";
+import DockedStationServices from "./components/DockedStationServices.vue";
 import Commander from "./components/Commander.vue";
 import Alert from "./components/Alert.vue";
 import Ranks from "./components/Ranks.vue";
@@ -56,16 +53,17 @@ export default defineComponent({
     System,
     Ship,
     DockedStation,
+    DockedStationServices,
     Commander,
     Alert
   },
   setup() {
     const journal = computed(() => store.state.journal);
     const dockedStation = ref(systemStore.state.dockedStation !== undefined);
-    const span = ref(8);
+    const span = ref(6);
 
     if (dockedStation.value) {
-      span.value = 6;
+      span.value = 4;
     }
 
     return {
@@ -91,6 +89,17 @@ body {
   text-align: center;
   background-image: url("./assets/background.jpg");
   overflow: auto;
+  color: aqua;
+}
+
+.window {
+  background-image: url("./assets/ui/window1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 217px;
+  height: 140px;
+  padding: 60px 30px 0 50px;
+  position: relative;
 }
 
 .el-card {

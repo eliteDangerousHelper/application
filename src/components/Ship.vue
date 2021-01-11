@@ -1,13 +1,8 @@
 <template>
-  <el-card>
-    <template #header>
-      <div class="clearfix">
-        <span>{{ t("components.ship.ship") }}: {{ ship.name }}</span>
-      </div>
-    </template>
+  <div class="window ship">
     <div>{{ t("components.ship.remainingFuel") }}: {{ ship.fuel.level }}/{{ ship.fuel.capacity }}</div>
     <div>{{ t("components.ship.type") }}: {{ ship.type }}</div>
-  </el-card>
+  </div>
 </template>
 
 <script lang="ts">

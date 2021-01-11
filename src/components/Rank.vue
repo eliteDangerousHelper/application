@@ -1,22 +1,24 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }" class="rank">
+  <div class="rank">
     <el-image
       :src="icon"
       class="image hidden-md-only"
       fit="contain"
       :title="name"
     />
+    <el-progress
+      width="30"
+      type="circle"
+      class="progress"
+      color="rgb(0,168,194)"
+      :text-inside="true"
+      :stroke-width="6"
+      :percentage="state.percent"
+    ></el-progress>
     <div class="info">
-      <el-progress
-        width="40"
-        type="dashboard"
-        :text-inside="true"
-        :stroke-width="6"
-        :percentage="state.percent"
-      ></el-progress>
       {{ rankName }}
     </div>
-  </el-card>
+  </div>
 </template>
 
 <script lang="ts">
@@ -71,23 +73,36 @@ export default defineComponent({
 
 <style lang="scss">
 .rank {
-  .el-card {
-    .el-card__body {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    }
+  background-image: url(/img/rounded1.cdc7c62d.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  color: rgb(0, 168, 194);
+
+  .image {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    top: 70px;
+    left: 56px;
+    width: 45px;
   }
-}
 
-.image {
-  max-height: 70px;
-}
+  .progress {
+    position: absolute;
+    top: 15px;
+    left: 29px;
+  }
 
-.info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 14px;
+  .info {
+    position: absolute;
+    top: 48px;
+    left: 35px;
+    text-align: center;
+    width: 80px;
+    overflow: hidden;
+  }
 }
 </style>

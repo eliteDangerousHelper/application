@@ -38,7 +38,8 @@ const state: SystemState = reactive({
     marketId: 1234,
     services: [
       "Service1",
-      "Service2"
+      "Service2",
+      "Service3"
     ]
   }
 });

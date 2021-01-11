@@ -1,9 +1,12 @@
 <template>
-  <el-row :gutter="20">
-    <el-col :span="4" v-for="(rank, index) in ranks" :key="rank.name">
-      <Rank :type="index" :state="rank" />
-    </el-col>
-  </el-row>
+  <div class="ranks">
+    <Rank
+      v-for="(rank, index) in ranks"
+      :key="rank.name"
+      :type="index"
+      :state="rank"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -28,7 +31,5 @@ export default defineComponent({
 <style scoped>
 .ranks {
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
 }
 </style>

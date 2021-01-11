@@ -26,31 +26,31 @@ const state: RanksState = reactive({
   Trade: {
     name: "Trade",
     icon: "Trade",
-    percent: 0,
+    percent: 10,
     level: 0
   },
   Explore: {
     name: "Explore",
     icon: "Explore",
-    percent: 0,
+    percent: 35,
     level: 0
   },
   Empire: {
     name: "Empire",
     icon: "Empire",
-    percent: 0,
+    percent: 75,
     level: 0
   },
   Federation: {
     name: "Federation",
     icon: "Federation",
-    percent: 0,
+    percent: 99,
     level: 0
   },
   CQC: {
     name: "CQC",
     icon: "CQC",
-    percent: 0,
+    percent: 50,
     level: 0
   }
 });

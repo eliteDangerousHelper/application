@@ -1,14 +1,10 @@
 <template>
-  <div class="window docked-station">
-    <div>
-      {{ station.government }}
-    </div>
-    <div>
-      {{ station.economy }}
-    </div>
-    <div>
-      {{ station.faction.name }}
-    </div>
+  <div class="window docked-station-services">
+    <el-row type="flex">
+      <el-col v-for="service in station.services" :key="service" :span="12">
+        {{ service }}
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -18,7 +14,7 @@ import systemStore from "@/store/system";
 import { useI18n } from "vue-i18n";
 
 export default defineComponent({
-  name: "DockedStation",
+  name: "DockedStationServices",
   setup() {
     const station = computed(() => systemStore.state.dockedStation);
     const { t } = useI18n();
@@ -29,3 +25,10 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+.window.docked-station-services {
+  padding: 60px 30px 0 50px;
+  width: 217px;
+}
+</style>

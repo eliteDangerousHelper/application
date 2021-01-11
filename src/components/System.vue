@@ -1,17 +1,12 @@
 <template>
-  <el-card>
-    <template #header>
-      <div class="clearfix">
-        <span>{{ t("components.system.system") }}: {{ system.name }}</span>
-      </div>
-    </template>
+  <div class="window system">
     <div>{{ t("components.system.security") }}: {{ system.security }}</div>
     <div>
       {{ t("components.system.allegency") }}: {{ system.allegiance ?? "indépendant" }}
     </div>
     <div>{{ t("components.system.population") }}: {{ system.population }}</div>
     <div>{{ t("components.system.economy") }}: {{ system.economy }}</div>
-  </el-card>
+  </div>
 </template>
 
 <script lang="ts">
