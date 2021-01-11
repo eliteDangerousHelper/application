@@ -23,11 +23,13 @@ import { i18n } from "../main";
 export default defineComponent({
   name: "Options",
   setup() {
-    const lang = ref(LOCALES.filter(val => val.value == defaultLocale)[0].value);
+    const lang = ref(
+      LOCALES.filter(val => val.value == defaultLocale)[0].value
+    );
 
     watch(lang, () => {
       console.log(lang.value);
-      i18n.global.locale.value = lang.value
+      i18n.global.locale.value = lang.value;
     });
 
     return {
