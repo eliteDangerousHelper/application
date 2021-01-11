@@ -4,7 +4,12 @@
     <el-container>
       <el-main>
         <el-row style="margin-top: 10px;" :gutter="20" type="flex">
-          <Ranks></Ranks>
+          <el-col :span="19">
+            <Ranks></Ranks>
+          </el-col>
+          <el-col :span="5">
+            <Actions></Actions>
+          </el-col>
         </el-row>
         <el-row style="margin-top: 10px;" :gutter="20" type="flex">
           <el-col :span="span">
@@ -36,6 +41,7 @@
 import { computed, defineComponent, ref } from "vue";
 import Loader from "./components/Loader.vue";
 import System from "./components/System.vue";
+import Actions from "./components/Actions.vue";
 import Ship from "./components/Ship.vue";
 import DockedStation from "./components/DockedStation.vue";
 import DockedStationServices from "./components/DockedStationServices.vue";
@@ -55,7 +61,8 @@ export default defineComponent({
     DockedStation,
     DockedStationServices,
     Commander,
-    Alert
+    Alert,
+    Actions
   },
   setup() {
     const journal = computed(() => store.state.journal);
@@ -76,14 +83,70 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
 html,
 body {
   height: 100%;
   overflow: hidden;
 }
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 20px;
+  border: 10px solid rgba(255, 255, 255, 0);
+  cursor: pointer;
+  background-color: initial;
+
+  > .text {
+    position: relative;
+    color: transparent;
+    background-image: linear-gradient(
+      90deg,
+      aqua 0%,
+      aqua 50%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 1) 100%
+    );
+    background-repeat: repeat;
+    background-size: 200%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: background-position 300ms;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    transform-origin: 100% 0;
+    transform: scale3d(0, 1, 1);
+    transition: transform 300ms;
+  }
+
+  &:hover {
+    .text {
+      background-position: 0 0;
+    }
+
+    &::before {
+      transform-origin: 0 0;
+      transform: scale3d(1, 1, 1);
+    }
+  }
+}
+
 #app {
   height: 100%;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -99,6 +162,16 @@ body {
   width: 217px;
   height: 140px;
   padding: 60px 30px 0 50px;
+  position: relative;
+}
+
+.window5 {
+  background-image: url("./assets/ui/window5.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 215px;
+  height: 112px;
+  padding: 60px 62px 50px 65px;
   position: relative;
 }
 

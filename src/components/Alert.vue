@@ -8,7 +8,6 @@
 import { computed, defineComponent } from "vue";
 import alertStore from "@/store/alert";
 import { ElMessage as Message } from "element-plus";
-import { h } from "vue";
 
 export default defineComponent({
   name: "Alert",
