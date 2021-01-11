@@ -11,7 +11,7 @@ import { ElMessage as Message } from "element-plus";
 import { h } from "vue";
 
 export default defineComponent({
-  name: "Commander",
+  name: "Alert",
   setup() {
     const alert = computed(() => alertStore.state);
 
@@ -20,7 +20,7 @@ export default defineComponent({
         message: "Ceci est un rappel",
         type: "success"
       });
-    }
+    };
     open1();
 
     return {
