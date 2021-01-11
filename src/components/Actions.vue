@@ -2,7 +2,7 @@
   <div class="window5 alert">
     <el-row>
       <el-col :span="12">
-        <Button @click="openOptions">option</Button>
+        <Button @click="openOptions">options</Button>
       </el-col>
       <el-col :span="12">
         <Button>param</Button>
