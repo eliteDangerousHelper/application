@@ -2,8 +2,20 @@
   <div v-if="true">
   <!-- <div v-if="journal !== undefined"> -->
     <el-container>
-      <el-main>
+      <el-header>
         <Ranks></Ranks>
+      </el-header>
+      <el-main>
+        <el-row style="margin-top: 10px;" :gutter="20" type="flex">
+          <el-col :span="20">
+            <Commander></Commander>
+          </el-col>
+          <el-col :span="4">
+            <Alert></Alert>
+          </el-col>
+        </el-row>
+      </el-main>
+      <el-footer>
         <el-row style="margin-top: 10px;" :gutter="20" type="flex">
           <el-col :span="span">
             <Commander></Commander>
@@ -18,7 +30,7 @@
             <Ship></Ship>
           </el-col>
         </el-row>
-      </el-main>
+      </el-footer>
     </el-container>
   </div>
   <Loader v-else></Loader>
@@ -31,6 +43,7 @@ import System from "./components/System.vue";
 import Ship from "./components/Ship.vue";
 import DockedStation from "./components/DockedStation.vue";
 import Commander from "./components/Commander.vue";
+import Alert from "./components/Alert.vue";
 import Ranks from "./components/Ranks.vue";
 import store from "./store/game";
 import systemStore from "./store/system";
@@ -43,7 +56,8 @@ export default defineComponent({
     System,
     Ship,
     DockedStation,
-    Commander
+    Commander,
+    Alert
   },
   setup() {
     const journal = computed(() => store.state.journal);
