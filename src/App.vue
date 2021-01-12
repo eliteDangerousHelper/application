@@ -4,8 +4,10 @@
     <el-container>
       <el-main>
         <el-row style="margin-top: 10px;" :gutter="20" type="flex">
-          <el-col :span="19">
+          <el-col :span="12">
             <Ranks></Ranks>
+          </el-col>
+          <el-col :span="7">
           </el-col>
           <el-col :span="5">
             <Actions></Actions>
@@ -31,6 +33,14 @@
             <Alert></Alert>
           </el-col>
         </el-row>
+        <el-row>
+          <el-col :span="12">
+            <Market></Market>
+          </el-col>
+          <el-col :span="12">
+            <SystemScan></SystemScan>
+          </el-col>
+        </el-row>
       </el-main>
     </el-container>
   </div>
@@ -43,6 +53,8 @@ import Loader from "./components/Loader.vue";
 import System from "./components/System.vue";
 import Actions from "./components/Actions.vue";
 import Ship from "./components/Ship.vue";
+import Market from "./components/Market.vue";
+import SystemScan from "./components/SystemScan.vue";
 import DockedStation from "./components/DockedStation.vue";
 import DockedStationServices from "./components/DockedStationServices.vue";
 import Commander from "./components/Commander.vue";
@@ -62,7 +74,9 @@ export default defineComponent({
     DockedStationServices,
     Commander,
     Alert,
-    Actions
+    Actions,
+    Market,
+    SystemScan
   },
   setup() {
     const journal = computed(() => store.state.journal);
@@ -162,6 +176,16 @@ body {
   width: 217px;
   height: 140px;
   padding: 60px 30px 0 50px;
+  position: relative;
+}
+
+.window2 {
+  background-image: url("./assets/ui/window2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 545px;
+  height: 300px;
+  padding: 105px 145px 130px 127px;
   position: relative;
 }
 

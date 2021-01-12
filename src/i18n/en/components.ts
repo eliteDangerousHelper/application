@@ -23,5 +23,11 @@ export default {
     ship: "Ship",
     remainingFuel: "Remaining fuel",
     type: "Type"
+  },
+  market: {
+    market: "Market",
+    id: "id",
+    buy: "To buy",
+    send: "To send"
   }
 }

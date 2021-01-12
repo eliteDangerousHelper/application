@@ -23,5 +23,11 @@ export default {
     ship: "Vaisseau",
     remainingFuel: "Carburant restant",
     type: "Type"
+  },
+  market: {
+    market: "Marché",
+    id: "id",
+    buy: "A acheter",
+    send: "A vendre"
   }
 }
