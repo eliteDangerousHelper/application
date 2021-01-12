@@ -1,4 +1,5 @@
 import { Locales } from "./locales";
+import optionsStore from "../store/options";
 
 import en from "./en";
 import fr from "./fr";
@@ -8,4 +9,4 @@ export const messages = {
   [Locales.FR]: fr
 };
 
-export const defaultLocale = Locales.EN;
+export const defaultLocale = optionsStore.state.lang;

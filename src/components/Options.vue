@@ -15,21 +15,19 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
-import { defaultLocale } from "../i18n";
 import { LOCALES } from "../i18n/locales";
 import { ElSelect, ElOption } from "element-plus";
-import { i18n } from "../main";
+import optionsStore from "../store/options";
 
 export default defineComponent({
   name: "Options",
   setup() {
     const lang = ref(
-      LOCALES.filter(val => val.value == defaultLocale)[0].value
+      LOCALES.filter(val => val.value == optionsStore.state.lang)[0].value
     );
 
     watch(lang, () => {
-      console.log(lang.value);
-      i18n.global.locale.value = lang.value;
+      optionsStore.state.lang = lang.value;
     });
 
     return {

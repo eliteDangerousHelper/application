@@ -16,13 +16,25 @@ import { defineComponent, h } from "vue";
 import Button from "./Button.vue";
 import Options from "./Options.vue";
 import { ElMessageBox as MessageBox } from "element-plus";
+import optionsStore from "../store/options";
+
+const { ipcRenderer } = window.require("electron");
 
 export default defineComponent({
   name: "Actions",
   setup() {
     const openOptions = () => {
       MessageBox({
-        message: h(Options)
+        message: h(Options),
+        confirmButtonText: "OK",
+        callback: action => {
+          if (action == "confirm") {
+            ipcRenderer.send(
+              "write-config",
+              JSON.stringify(optionsStore.state)
+            );
+          }
+        }
       });
     };
     return {
