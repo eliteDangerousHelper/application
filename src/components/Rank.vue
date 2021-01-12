@@ -73,7 +73,7 @@ export default defineComponent({
 
 <style lang="scss">
 .rank {
-  background-image: url(/img/rounded1.cdc7c62d.png);
+  background-image: url("../assets/ui/rounded1.png");
   background-size: contain;
   background-repeat: no-repeat;
   width: 150px;
