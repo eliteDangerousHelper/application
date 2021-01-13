@@ -1,9 +1,6 @@
-import { Stats } from "fs";
-import { FSWatcher } from "chokidar";
-import { once } from "events";
+import { lstatSync, readdirSync, readFileSync, Stats } from "fs";
+import { FSWatcher, watch } from "chokidar";
 
-const remote = window.require("electron").remote;
-const fs = remote.require("fs");
 const regexJournal = /Journal.*\.log/;
 
 interface FileInfo {
@@ -12,7 +9,7 @@ interface FileInfo {
 }
 
 const getLines = (path: string): string[] => {
-  const data: string = fs.readFileSync(path, 'UTF-8');
+  const data: string = readFileSync(path, "utf8");
   
   return data.split(/\r?\n/);
 }
@@ -41,8 +38,7 @@ export const checkJournal = (path: string) => {
 };
 
 export const watchNewJournal = (folder: string): FSWatcher => {
-  const chokidar = remote.require("chokidar");
-  const watcher = chokidar.watch(folder, {
+  const watcher = watch(folder, {
     ignoreInitial: true,
     persistent: true
   });
@@ -64,11 +60,10 @@ export const searchJournal = async (
 ): Promise<string | undefined> => {
   let journal = undefined;
 
-  const files: FileInfo[] = fs
-    .readdirSync(folder)
-    .filter((f: string) => fs.lstatSync(folder + f).isFile())
+  const files: FileInfo[] = readdirSync(folder)
+    .filter((f: string) => lstatSync(folder + f).isFile())
     .filter((f: string) => f.match(regexJournal))
-    .map((f: string) => ({ name: f, stat: fs.lstatSync(folder + f) }))
+    .map((f: string) => ({ name: f, stat: lstatSync(folder + f) }))
     .sort(
       (a: FileInfo, b: FileInfo) =>
         b.stat.mtime.getTime() - a.stat.mtime.getTime()

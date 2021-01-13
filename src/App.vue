@@ -1,6 +1,5 @@
 <template>
   <div v-if="true">
-  <!-- <div v-if="journal !== undefined"> -->
     <el-container>
       <el-main>
         <el-row style="margin-top: 10px;" :gutter="20" type="flex">
@@ -8,6 +7,7 @@
             <Ranks></Ranks>
           </el-col>
           <el-col :span="7">
+            <Reputations></Reputations>
           </el-col>
           <el-col :span="5">
             <Actions></Actions>
@@ -48,10 +48,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import Loader from "./components/Loader.vue";
 import System from "./components/System.vue";
 import Actions from "./components/Actions.vue";
+import Reputations from "./components/Reputations.vue";
 import Ship from "./components/Ship.vue";
 import Market from "./components/Market.vue";
 import SystemScan from "./components/SystemScan.vue";
@@ -60,8 +61,7 @@ import DockedStationServices from "./components/DockedStationServices.vue";
 import Commander from "./components/Commander.vue";
 import Alert from "./components/Alert.vue";
 import Ranks from "./components/Ranks.vue";
-import store from "./store/game";
-import systemStore from "./store/system";
+import systemStore from "./store/main/system";
 
 export default defineComponent({
   name: "App",
@@ -76,10 +76,10 @@ export default defineComponent({
     Alert,
     Actions,
     Market,
-    SystemScan
+    SystemScan,
+    Reputations
   },
   setup() {
-    const journal = computed(() => store.state.journal);
     const dockedStation = ref(systemStore.state.dockedStation !== undefined);
     const span = ref(6);
 
@@ -88,7 +88,6 @@ export default defineComponent({
     }
 
     return {
-      journal,
       span,
       dockedStation
     };

@@ -1,10 +1,8 @@
+import { watch } from 'chokidar';
 import { EventEmitter } from 'events';
-import store from "../store/game";
-
-const remote = window.require("electron").remote;
-const chokidar = remote.require("chokidar");
-const fs = remote.require("fs");
-const readLastLines = remote.require("read-last-lines-ts");
+import { createReadStream } from 'fs';
+import { readLastLines } from 'read-last-lines-ts';
+import store from "../store/background/game";
 
 class Observer extends EventEmitter {
   constructor() {
@@ -17,7 +15,7 @@ class Observer extends EventEmitter {
         `[${new Date().toLocaleString()}] Watching for file changes on: ${targetFile}`
       );
 
-      const watcher = chokidar.watch(targetFile, { persistent: true });
+      const watcher = watch(targetFile, { persistent: true });
 
       watcher.on('change', async (filePath: string) => {
         console.log(
@@ -30,7 +28,7 @@ class Observer extends EventEmitter {
         store.state.lastLine = nbLines;
 
         // Get update content of file, in this case is one line
-        const buffer = await readLastLines.readLastLines(filePath, lineToRead);
+        const buffer = await readLastLines(filePath, lineToRead);
         const updateContent = buffer.toString("utf8")
 
         // emit an event when the file has been updated
@@ -46,7 +44,7 @@ class Observer extends EventEmitter {
     return new Promise((resolve, reject) => {
       let i;
       let count = 0;
-      fs.createReadStream(filePath)
+      createReadStream(filePath)
           .on('error', (e: Error) => reject(e))
           .on('data', (chunk: any) => {
               for (i=0; i < chunk.length; ++i) if (chunk[i] == 10) count++;

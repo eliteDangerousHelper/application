@@ -1,5 +1,5 @@
 import { Docked, FSDJump, Location } from '@/interfaces/events/travel';
-import systemStore from "@/store/system";
+import systemStore from "@/store/main/system";
 
 export const location = (event: Location) => {
   systemStore.state.name = event.StarSystem;

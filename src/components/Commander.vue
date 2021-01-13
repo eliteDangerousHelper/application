@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import commanderStore from "@/store/commander";
+import commanderStore from "@/store/main/commander";
 import { useI18n } from "vue-i18n";
 
 export default defineComponent({

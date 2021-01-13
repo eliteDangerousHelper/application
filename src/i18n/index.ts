@@ -1,5 +1,5 @@
 import { Locales } from "./locales";
-import optionsStore from "../store/options";
+import optionsStore from "../store/main/options";
 
 import en from "./en";
 import fr from "./fr";

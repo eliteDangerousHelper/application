@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import marketStore from "@/store/market";
+import marketStore from "@/store/main/market";
 import { useI18n } from "vue-i18n";
 
 export default defineComponent({

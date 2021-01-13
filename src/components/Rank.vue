@@ -24,7 +24,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { Rank } from "../store/ranks";
+import { Rank } from "../store/main/ranks";
 
 export default defineComponent({
   name: "Rank",

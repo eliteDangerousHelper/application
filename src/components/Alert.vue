@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import alertStore from "@/store/alert";
+import alertStore from "@/store/main/alert";
 
 export default defineComponent({
   name: "Alert",

@@ -17,7 +17,7 @@
 import { defineComponent, ref, watch } from "vue";
 import { LOCALES } from "../i18n/locales";
 import { ElSelect, ElOption } from "element-plus";
-import optionsStore from "../store/options";
+import optionsStore from "../store/main/options";
 
 export default defineComponent({
   name: "Options",

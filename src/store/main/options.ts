@@ -1,5 +1,5 @@
 import { Locales } from "@/i18n/locales";
-import { IpcMainEvent } from "electron";
+import { IpcRendererEvent } from "electron";
 import { reactive } from "vue";
 
 const { ipcRenderer } = window.require("electron");
@@ -15,7 +15,7 @@ const state: OptionsState = reactive({
   lang: Locales.EN,
 });
 
-ipcRenderer.on('fetch-options-end', (event: IpcMainEvent, arg: string) => {
+ipcRenderer.on('fetch-options-end', (event: IpcRendererEvent, arg: string) => {
   const options = JSON.parse(arg) as OptionsState;
   state.lang = options.lang
 })

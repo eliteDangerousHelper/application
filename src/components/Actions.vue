@@ -16,7 +16,7 @@ import { defineComponent, h } from "vue";
 import Button from "./Button.vue";
 import Options from "./Options.vue";
 import { ElMessageBox as MessageBox } from "element-plus";
-import optionsStore from "../store/options";
+import optionsStore from "../store/main/options";
 
 const { ipcRenderer } = window.require("electron");
 

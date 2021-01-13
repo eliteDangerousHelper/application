@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import shipStore from "@/store/ship";
+import shipStore from "@/store/main/ship";
 import { useI18n } from "vue-i18n";
 
 export default defineComponent({

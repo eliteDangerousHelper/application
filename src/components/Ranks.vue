@@ -12,7 +12,7 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import Rank from "./Rank.vue";
-import store from "../store/ranks";
+import store from "../store/main/ranks";
 
 export default defineComponent({
   name: "Ranks",

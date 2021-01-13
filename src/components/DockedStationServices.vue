@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import systemStore from "@/store/system";
+import systemStore from "@/store/main/system";
 import { useI18n } from "vue-i18n";
 
 export default defineComponent({

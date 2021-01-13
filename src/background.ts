@@ -4,7 +4,11 @@ import { app, protocol, BrowserWindow, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { fetchOptions, writeConfig } from "./utils/options";
-import { OptionsState } from "./store/options";
+import Obserser from "@/utils/observer";
+import { checkJournal, searchJournal, watchNewJournal } from "./utils/gameWatch";
+import gameStore from "./store/background/game";
+
+const obs = new Obserser();
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -21,6 +25,29 @@ ipcMain.on("fetch-options", (event) => {
     event.reply('fetch-options-end', options);
   });
 
+});
+
+obs.on('file-updated', (log: { message: string }) => {
+  const lines = log.message.split(/\r?\n/);
+
+  for (const line of lines) {
+    if (line !== "") {
+      ipcMain.emit("new-event", JSON.parse(line));
+    }
+  }
+});
+
+searchJournal(gameStore.state.gameDir).then((filename: string | undefined) => {
+  gameStore.state.journal = filename;
+  if (!gameStore.state.journal) {
+    watchNewJournal(gameStore.state.gameDir).on("add", path => {
+      const valid = checkJournal(path);
+      gameStore.state.journal = valid ? path.replace(gameStore.state.gameDir, "") : undefined;
+      obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
+    });
+  } else {
+    obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
+  }
 });
 
 async function createWindow() {
