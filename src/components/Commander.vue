@@ -1,6 +1,6 @@
 <template>
   <div class="window commander">
-    <div>{{ t("components.commander.credit") }}: {{ commander.credit }}</div>
+    <div>{{ t("components.commander.credit") }}: {{ credit }}</div>
     <div>{{ t("components.commander.loan") }}: {{ commander.loan }}</div>
     <div v-if="commander.squadron">
       {{ t("components.commander.squadron") }}:
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 import commanderStore from "@/store/main/commander";
 import { useI18n } from "vue-i18n";
 
@@ -22,9 +22,15 @@ export default defineComponent({
   setup() {
     const commander = computed(() => commanderStore.state);
     const { t } = useI18n();
+    const credit = ref(new Intl.NumberFormat().format(commander.value.credit));
+
+    watch(commander, () => {
+      credit.value = new Intl.NumberFormat().format(commander.value.credit);
+    });
 
     return {
       commander,
+      credit,
       t
     };
   }
