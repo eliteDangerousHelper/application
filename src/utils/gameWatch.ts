@@ -30,7 +30,7 @@ const getLastLine = (path: string): string | undefined => {
 };
 
 export const checkJournal = (path: string) => {
-  console.log('checkJournal');
+  console.log('checkJournal', path);
   
   const lastLine = getLastLine(path);
 

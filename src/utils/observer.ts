@@ -9,11 +9,18 @@ class Observer extends EventEmitter {
     super();
   }
 
-  watchFile(targetFile: string) {
+  async watchFile(targetFile: string) {
     try {
       console.log(
         `[${new Date().toLocaleString()}] Watching for file changes on: ${targetFile}`
       );
+
+      // Get update content of file, in this case is one line
+      const buffer = await readLastLines(targetFile, 0);
+      const updateContent = buffer.toString("utf8")
+
+      // emit an event when the file has been updated
+      this.emit('file-updated', { message: updateContent });
 
       const watcher = watch(targetFile, { persistent: true });
 

@@ -27,23 +27,18 @@ ipcMain.on("fetch-options", (event) => {
 
 });
 
-obs.on('file-updated', (log: { message: string }) => {
-  const lines = log.message.split(/\r?\n/);
-
-  for (const line of lines) {
-    if (line !== "") {
-      ipcMain.emit("new-event", JSON.parse(line));
-    }
-  }
-});
-
 searchJournal(gameStore.state.gameDir).then((filename: string | undefined) => {
   gameStore.state.journal = filename;
   if (!gameStore.state.journal) {
     watchNewJournal(gameStore.state.gameDir).on("add", path => {
       const valid = checkJournal(path);
-      gameStore.state.journal = valid ? path.replace(gameStore.state.gameDir, "") : undefined;
-      obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
+      if (valid) {
+        gameStore.state.journal = path.replace(gameStore.state.gameDir, "");
+        obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
+      } else {
+        console.error("unvalid file", path);
+        
+      }
     });
   } else {
     obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
@@ -74,6 +69,17 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
   }
+
+  obs.on('file-updated', (log: { message: string }) => {
+    const lines = log.message.split(/\r?\n/);
+
+    for (const line of lines) {
+      if (line !== "") {
+        console.log("emit event", line);
+        win.webContents.send("new-event", JSON.parse(line));
+      }
+    }
+  });
 }
 
 // Quit when all windows are closed.

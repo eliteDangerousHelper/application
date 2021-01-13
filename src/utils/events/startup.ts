@@ -1,6 +1,6 @@
 import { Commander, Engineer, EngineerProgress, Heading, LoadGame, Missions, Progress, Rank, Reputation, Shutdown, SquadronStartup } from '@/interfaces/events/startup';
 import rankStore from "@/store/main/ranks";
-// import gameStore from "@/store/game";
+import gameStore from "@/store/main/game";
 import commanderStore from "@/store/main/commander";
 import shipStore from "@/store/main/ship";
 import missionsStore from "@/store/main/missions";
@@ -20,9 +20,10 @@ export const loadGame = (event: LoadGame) => {
   commanderStore.state.credit = event.Credits;
   commanderStore.state.loan = event.Loan;
   
-  // gameStore.state.horizons = event.Horizons;
-  // gameStore.state.group = event.Group === "" ? undefined : event.Group;
-  // gameStore.state.mode = event.GameMode;
+  gameStore.state.horizons = event.Horizons;
+  gameStore.state.group = event.Group === "" ? undefined : event.Group;
+  gameStore.state.mode = event.GameMode;
+  gameStore.state.launch = true;
 
   shipStore.state.name = event.ShipName;
   shipStore.state.id = event.ShipID;
@@ -91,10 +92,12 @@ export const squadronStartup = (event: SquadronStartup) => {
 }
 
 export const shutdown = (event: Shutdown) => {
-  // gameStore.state.journal = undefined
+  gameStore.state.launch = false
 }
 
 export const progress = (event: Progress) => {
+  console.log(event);
+  
   rankStore.state.CQC.percent = event.CQC
   rankStore.state.Combat.percent = event.Combat
   rankStore.state.Empire.percent = event.Empire

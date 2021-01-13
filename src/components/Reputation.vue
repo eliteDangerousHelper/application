@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 export default defineComponent({
@@ -57,3 +57,9 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.reputation {
+  background-image: url("../assets/ui/bar4.png");
+}
+</style>

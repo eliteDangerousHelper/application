@@ -18,6 +18,7 @@ export default defineComponent({
   name: "Ranks",
   setup() {
     const ranks = computed(() => store.state);
+
     return {
       ranks
     };

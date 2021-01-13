@@ -13,7 +13,7 @@
       color="rgb(0,168,194)"
       :text-inside="true"
       :stroke-width="6"
-      :percentage="state.percent"
+      :percentage="percent"
     ></el-progress>
     <div class="info">
       {{ rankName }}
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from "vue";
+import { computed, defineComponent, PropType, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { Rank } from "../store/main/ranks";
 
@@ -39,32 +39,44 @@ export default defineComponent({
     const icon = ref(require(`../assets/ranks/${props.state?.icon}.png`));
     const name = computed(() => props.state?.name);
     const { t } = useI18n();
-
     const rankName = ref("");
-    switch (props.state?.name) {
-      case "Combat":
-        rankName.value = t("ranks.combat." + props.state.level);
-        break;
-      case "Trade":
-        rankName.value = t("ranks.trade." + props.state.level);
-        break;
-      case "Explore":
-        rankName.value = t("ranks.explore." + props.state.level);
-        break;
-      case "Empire":
-        rankName.value = t("ranks.empire." + props.state.level);
-        break;
-      case "Federation":
-        rankName.value = t("ranks.federation." + props.state.level);
-        break;
-      case "CQC":
-        rankName.value = t("ranks.cqc." + props.state.level);
-        break;
-    }
+    const percent = ref(props.state?.percent);
+
+    const getRankName = (
+      name: string | undefined,
+      level: number | undefined
+    ): string => {
+      switch (name) {
+        case "Combat":
+          return t("ranks.combat." + level);
+        case "Trade":
+          return t("ranks.trade." + level);
+        case "Explore":
+          return t("ranks.explore." + level);
+        case "Empire":
+          return t("ranks.empire." + level);
+        case "Federation":
+          return t("ranks.federation." + level);
+        case "CQC":
+          return t("ranks.cqc." + level);
+        default:
+          return "";
+      }
+    };
+
+    watch(props, () => {
+      rankName.value = getRankName(props.state?.name, props.state?.level);
+      percent.value = props.state?.percent;
+      console.log(props.state?.percent);
+      
+    });
+
+    rankName.value = getRankName(props.state?.name, props.state?.level);
 
     return {
       icon,
       rankName,
+      percent,
       name
     };
   }
