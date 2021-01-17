@@ -7,8 +7,6 @@
       {{ commander.squadron.name }} ({{ t("components.commander.rank") }}:
       {{ commander.squadron.rank }})
     </div>
-    <div>Empire: {{ commander.reputation.empire }}</div>
-    <div>Federation: {{ commander.reputation.federation }}</div>
   </div>
 </template>
 
