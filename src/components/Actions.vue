@@ -27,7 +27,7 @@ export default defineComponent({
       MessageBox({
         message: h(Options),
         confirmButtonText: "OK",
-        callback: action => {
+        callback: (action: any) => {
           if (action == "confirm") {
             ipcRenderer.send(
               "write-config",

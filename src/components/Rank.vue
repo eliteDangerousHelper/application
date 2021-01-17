@@ -67,8 +67,6 @@ export default defineComponent({
     watch(props, () => {
       rankName.value = getRankName(props.state?.name, props.state?.level);
       percent.value = props.state?.percent;
-      console.log(props.state?.percent);
-      
     });
 
     rankName.value = getRankName(props.state?.name, props.state?.level);

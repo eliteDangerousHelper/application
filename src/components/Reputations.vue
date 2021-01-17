@@ -1,12 +1,10 @@
 <template>
-  <el-row>
-    <Reputation
-      v-for="(reputation, index) in commander.reputation"
-      :key="reputation"
-      :type="index"
-      :reputation="reputation"
-    />
-  </el-row>
+  <Reputation
+    v-for="(reputation, index) in commander.reputation"
+    :key="reputation"
+    :type="index"
+    :reputation="reputation"
+  />
 </template>
 
 <script lang="ts">
