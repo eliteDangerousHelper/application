@@ -18,15 +18,20 @@
 import { computed, defineComponent } from "vue";
 import marketStore from "@/store/main/market";
 import { useI18n } from "vue-i18n";
+import { getCommoditiesByInterestedPurchase } from "@/utils/market";
 
 export default defineComponent({
   name: "Market",
   setup() {
     const market = computed(() => marketStore.state);
     const { t } = useI18n();
+    const commoditiesInterestedPurchase = computed(() =>
+      getCommoditiesByInterestedPurchase(marketStore.state)
+    );
     return {
       market,
-      t
+      t,
+      commoditiesInterestedPurchase
     };
   }
 });

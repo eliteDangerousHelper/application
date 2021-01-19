@@ -9,6 +9,9 @@ import { checkJournal, searchJournal, watchNewJournal } from "./utils/gameWatch"
 import gameStore from "./store/background/game";
 
 const obs = new Obserser();
+const marketObs = new Obserser();
+marketObs.watchFile(gameStore.state.gameDir + "Market.json")
+
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Scheme must be registered before the app is ready
@@ -77,6 +80,17 @@ async function createWindow() {
       if (line !== "") {
         console.log("emit event", line);
         win.webContents.send("new-event", JSON.parse(line));
+      }
+    }
+  });
+
+  marketObs.on('file-updated', (log: { message: string}) => {
+    const lines = log.message.split(/\r?\n/);
+
+    for (const line of lines) {
+      if (line !== "") {
+        console.log("emit event", line);
+        win.webContents.send("add-commodities", JSON.parse(line));
       }
     }
   });
