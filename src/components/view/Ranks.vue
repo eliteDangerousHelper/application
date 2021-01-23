@@ -12,7 +12,7 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import Rank from "./Rank.vue";
-import store from "../store/main/ranks";
+import store from "@/store/main/ranks";
 
 export default defineComponent({
   name: "Ranks",
@@ -32,5 +32,6 @@ export default defineComponent({
 <style scoped>
 .ranks {
   display: flex;
+  grid-area: ranks;
 }
 </style>

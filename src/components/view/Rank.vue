@@ -1,20 +1,15 @@
 <template>
   <div class="rank">
-    <el-image
-      :src="icon"
-      class="image hidden-md-only"
-      fit="contain"
-      :title="name"
-    />
-    <el-progress
-      width="30"
-      type="circle"
+    <div class="image">
+      <img :src="icon" :title="name" />
+    </div>
+    <CircleProgress
+      width="115"
       class="progress"
       color="rgb(0,168,194)"
-      :text-inside="true"
-      :stroke-width="6"
+      :stroke-width="10"
       :percentage="percent"
-    ></el-progress>
+    ></CircleProgress>
     <div class="info">
       {{ rankName }}
     </div>
@@ -24,7 +19,8 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { Rank } from "../store/main/ranks";
+import { Rank } from "@/store/main/ranks";
+import CircleProgress from "@/components/ui/CircleProgress.vue";
 
 export default defineComponent({
   name: "Rank",
@@ -36,7 +32,7 @@ export default defineComponent({
   },
   setup(props) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const icon = ref(require(`../assets/ranks/${props.state?.icon}.png`));
+    const icon = ref(require(`@/assets/ranks/${props.state?.icon}.png`));
     const name = computed(() => props.state?.name);
     const { t } = useI18n();
     const rankName = ref("");
@@ -77,13 +73,16 @@ export default defineComponent({
       percent,
       name
     };
+  },
+  components: {
+    CircleProgress
   }
 });
 </script>
 
 <style lang="scss">
 .rank {
-  background-image: url("../assets/ui/rounded1.png");
+  background-image: url("../../assets/ui/rounded1.png");
   background-size: contain;
   background-repeat: no-repeat;
   width: 150px;
@@ -98,12 +97,17 @@ export default defineComponent({
     top: 70px;
     left: 56px;
     width: 45px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .progress {
     position: absolute;
-    top: 15px;
-    left: 29px;
+    top: 16px;
+    left: 18px;
   }
 
   .info {

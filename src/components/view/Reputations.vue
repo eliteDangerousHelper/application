@@ -1,10 +1,12 @@
 <template>
-  <Reputation
-    v-for="(reputation, index) in commander.reputation"
-    :key="reputation"
-    :type="index"
-    :reputation="reputation"
-  />
+  <div class="reputations">
+    <Reputation
+      v-for="(reputation, index) in commander.reputation"
+      :key="reputation"
+      :type="index"
+      :reputation="reputation"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -28,3 +30,9 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.reputations {
+  grid-area: reputations;
+}
+</style>

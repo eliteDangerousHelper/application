@@ -29,3 +29,9 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.docked-station {
+  grid-area: docked-station;
+}
+</style>

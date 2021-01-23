@@ -1,16 +1,14 @@
 <template>
   <div class="window2 market">
-    <el-row>
-      <el-col :span="6" class="first">
-        <div>{{ t("components.market.id") }}: {{ market.id }}</div>
-      </el-col>
-      <el-col :span="9">
-        <div>{{ t("components.market.buy") }}</div>
-      </el-col>
-      <el-col :span="9">
-        <div>{{ t("components.market.send") }}</div>
-      </el-col>
-    </el-row>
+    <div class="first">
+      <div>{{ t("components.market.id") }}: {{ market.id }}</div>
+    </div>
+    <div>
+      <div>{{ t("components.market.buy") }}</div>
+    </div>
+    <div>
+      <div>{{ t("components.market.send") }}</div>
+    </div>
   </div>
 </template>
 
@@ -38,7 +36,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.market {
+  grid-area: market;
+  display: grid;
+  grid-template-columns: 1fr 3fr 3fr;
+  gap: 10px;
+}
 .first {
-  margin-top: 87px;
+  margin-top: 110px;
 }
 </style>

@@ -21,6 +21,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.alert {
+  grid-area: alert;
+}
 .item {
   margin-right: 40px;
   margin-top: 15px;

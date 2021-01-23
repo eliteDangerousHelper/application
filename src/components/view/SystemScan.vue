@@ -1,13 +1,11 @@
 <template>
-  <div class="window2 systemScan">
-    <el-row>
-      <el-col :span="6" class="first">
-        <div>{{ t("components.system.system") }}: {{ system.name }}</div>
-      </el-col>
-      <el-col :span="18">
-        <div></div>
-      </el-col>
-    </el-row>
+  <div class="window2 system-scan">
+    <div class="first">
+      <div>{{ t("components.system.system") }}: {{ system.name }}</div>
+    </div>
+    <div>
+      <div></div>
+    </div>
   </div>
 </template>
 
@@ -30,7 +28,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.system-scan {
+  grid-area: system-scan;
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  gap: 10px;
+}
 .first {
-  margin-top: 87px;
+  margin-top: 110px;
 }
 </style>

@@ -22,3 +22,9 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.ship {
+  grid-area: ship;
+}
+</style>

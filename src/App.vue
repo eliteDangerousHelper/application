@@ -1,67 +1,35 @@
 <template>
-  <div v-if="true">
-    <el-container>
-      <el-main>
-        <el-row style="margin-top: 10px;" :gutter="20" type="flex">
-          <el-col :span="12">
-            <Ranks></Ranks>
-          </el-col>
-          <el-col :span="7">
-            <Reputations></Reputations>
-          </el-col>
-          <el-col :span="5">
-            <Actions></Actions>
-          </el-col>
-        </el-row>
-        <el-row style="margin-top: 10px;" :gutter="20" type="flex">
-          <el-col :span="span">
-            <Commander></Commander>
-          </el-col>
-          <el-col :span="span">
-            <System></System>
-          </el-col>
-          <el-col :span="span" v-if="dockedStation">
-            <DockedStation></DockedStation>
-          </el-col>
-          <el-col :span="span" v-if="dockedStation">
-            <DockedStationServices></DockedStationServices>
-          </el-col>
-          <el-col :span="span">
-            <Ship></Ship>
-          </el-col>
-          <el-col :span="span">
-            <Alert></Alert>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            <Market></Market>
-          </el-col>
-          <el-col :span="12">
-            <SystemScan></SystemScan>
-          </el-col>
-        </el-row>
-      </el-main>
-    </el-container>
+  <div v-if="true" class="main">
+    <Ranks></Ranks>
+    <Reputations></Reputations>
+    <Actions></Actions>
+    <Commander></Commander>
+    <System></System>
+    <DockedStation></DockedStation>
+    <DockedStationServices v-if="dockedStation"></DockedStationServices>
+    <Ship></Ship>
+    <Alert></Alert>
+    <Market></Market>
+    <SystemScan></SystemScan>
   </div>
   <Loader v-else></Loader>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import Loader from "./components/Loader.vue";
-import System from "./components/System.vue";
-import Actions from "./components/Actions.vue";
-import Reputations from "./components/Reputations.vue";
-import Ship from "./components/Ship.vue";
-import Market from "./components/Market.vue";
-import SystemScan from "./components/SystemScan.vue";
-import DockedStation from "./components/DockedStation.vue";
-import DockedStationServices from "./components/DockedStationServices.vue";
-import Commander from "./components/Commander.vue";
-import Alert from "./components/Alert.vue";
-import Ranks from "./components/Ranks.vue";
-import systemStore from "./store/main/system";
+import Loader from "@/components/view/Loader.vue";
+import System from "@/components/view/System.vue";
+import Actions from "@/components/view/Actions.vue";
+import Reputations from "@/components/view/Reputations.vue";
+import Ship from "@/components/view/Ship.vue";
+import Market from "@/components/view/Market.vue";
+import SystemScan from "@/components/view/SystemScan.vue";
+import DockedStation from "@/components/view/DockedStation.vue";
+import DockedStationServices from "@/components/view/DockedStationServices.vue";
+import Commander from "@/components/view/Commander.vue";
+import Alert from "@/components/view/Alert.vue";
+import Ranks from "@/components/view/Ranks.vue";
+import systemStore from "@/store/main/system";
 
 export default defineComponent({
   name: "App",
@@ -100,61 +68,22 @@ export default defineComponent({
 
 html,
 body {
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
-.button {
-  display: flex;
-  justify-content: center;
+.main {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 1fr) 2fr;
+  grid-template-areas:
+    "ranks ranks ranks reputations reputations actions"
+    "commander system docked-station docked-station-services ship alert"
+    "market market market system-scan system-scan system-scan";
   align-items: center;
-  position: relative;
-  margin: 20px;
-  border: 10px solid rgba(255, 255, 255, 0);
-  cursor: pointer;
-  background-color: initial;
-
-  > .text {
-    position: relative;
-    color: transparent;
-    background-image: linear-gradient(
-      90deg,
-      aqua 0%,
-      aqua 50%,
-      rgba(255, 255, 255, 1) 50%,
-      rgba(255, 255, 255, 1) 100%
-    );
-    background-repeat: repeat;
-    background-size: 200%;
-    background-position: 100% 0;
-    -webkit-background-clip: text;
-    background-clip: text;
-    transition: background-position 300ms;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0);
-    transform-origin: 100% 0;
-    transform: scale3d(0, 1, 1);
-    transition: transform 300ms;
-  }
-
-  &:hover {
-    .text {
-      background-position: 0 0;
-    }
-
-    &::before {
-      transform-origin: 0 0;
-      transform: scale3d(1, 1, 1);
-    }
-  }
+  justify-items: center;
+  height: 100vh;
 }
 
 #app {
@@ -196,19 +125,5 @@ body {
   height: 112px;
   padding: 60px 62px 50px 65px;
   position: relative;
-}
-
-.el-card {
-  border: 1px solid rgba(41, 41, 41, 0.95);
-
-  .el-card__header,
-  .el-card__body {
-    background-color: rgba(41, 41, 41, 0.95);
-    color: #eee;
-  }
-
-  .el-card__body {
-    height: 100%;
-  }
 }
 </style>

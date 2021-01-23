@@ -38,6 +38,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.commander {
+  grid-area: commander;
+}
 .item {
   margin-right: 40px;
   margin-top: 15px;

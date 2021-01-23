@@ -39,7 +39,15 @@ const state: SystemState = reactive({
     services: [
       "Service1",
       "Service2",
-      "Service3"
+      "Service3",
+      "Service4",
+      "Service5",
+      "Service6",
+      "Service7",
+      "Service8",
+      "Service932154865",
+      "Service10",
+      "Service11"
     ]
   }
 });

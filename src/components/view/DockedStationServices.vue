@@ -1,10 +1,8 @@
 <template>
   <div class="window docked-station-services">
-    <el-row type="flex">
-      <el-col v-for="service in station.services" :key="service" :span="12">
-        {{ service }}
-      </el-col>
-    </el-row>
+    <div v-for="service in services" :key="service">
+      {{ service }}
+    </div>
   </div>
 </template>
 
@@ -16,10 +14,10 @@ import { useI18n } from "vue-i18n";
 export default defineComponent({
   name: "DockedStationServices",
   setup() {
-    const station = computed(() => systemStore.state.dockedStation);
+    const services = computed(() => systemStore.state.dockedStation?.services.slice(0,9));
     const { t } = useI18n();
     return {
-      station,
+      services,
       t
     };
   }
@@ -27,6 +25,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.docked-station-services {
+  grid-area: docked-station-services;
+  display: grid;
+  grid-template-columns: minmax(auto, 47%) minmax(auto, 47%);
+  column-gap: 6%;
+  grid-template-rows: 20px;
+  grid-auto-rows: 20px;
+
+  div {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
 .window.docked-station-services {
   padding: 60px 30px 0 50px;
   width: 217px;
