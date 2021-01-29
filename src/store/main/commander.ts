@@ -25,11 +25,11 @@ export interface CommanderState {
 const state: CommanderState = reactive({
   name: "",
   fid: "",
-  credit: 63534982,
-  loan: 250043,
+  credit: 0,
+  loan: 0,
   reputation: {
-    empire: 0.405014,
-    federation: 77.125900,
+    empire: 0,
+    federation: 0,
   },
   engineers: [],
 });

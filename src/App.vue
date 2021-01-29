@@ -1,5 +1,5 @@
 <template>
-  <div v-if="true" class="main">
+  <div v-if="launch" class="main">
     <Ranks></Ranks>
     <Reputations></Reputations>
     <Actions></Actions>
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import Loader from "@/components/view/Loader.vue";
 import System from "@/components/view/System.vue";
 import Actions from "@/components/view/Actions.vue";
@@ -29,6 +29,7 @@ import DockedStationServices from "@/components/view/DockedStationServices.vue";
 import Commander from "@/components/view/Commander.vue";
 import Alert from "@/components/view/Alert.vue";
 import Ranks from "@/components/view/Ranks.vue";
+import gameStore from "@/store/main/game";
 import systemStore from "@/store/main/system";
 
 export default defineComponent({
@@ -49,6 +50,7 @@ export default defineComponent({
   },
   setup() {
     const dockedStation = ref(systemStore.state.dockedStation !== undefined);
+    const launch = computed(() => gameStore.state.launch);
     const span = ref(6);
 
     if (dockedStation.value) {
@@ -57,7 +59,8 @@ export default defineComponent({
 
     return {
       span,
-      dockedStation
+      dockedStation,
+      launch
     };
   }
 });

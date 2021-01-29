@@ -6,8 +6,8 @@ export interface AlertState {
 }
 
 const state: AlertState = reactive({
-  title: "Docked",
-  message: "You're docked at Ross Station"
+  title: "",
+  message: ""
 });
 
 export default { state };

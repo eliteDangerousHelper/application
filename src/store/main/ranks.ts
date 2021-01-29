@@ -38,7 +38,7 @@ const state: RanksState = reactive({
   Empire: {
     name: "Empire",
     icon: "Empire",
-    percent: 75,
+    percent: 0,
     level: 0
   },
   Federation: {
@@ -50,7 +50,7 @@ const state: RanksState = reactive({
   CQC: {
     name: "CQC",
     icon: "CQC",
-    percent: 50,
+    percent: 0,
     level: 0
   }
 });

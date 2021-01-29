@@ -56,7 +56,7 @@ export interface MarketState {
 }
 
 const state: MarketState = reactive({
-  id: 287467,
+  id: 0,
   commodities: []
 });
 

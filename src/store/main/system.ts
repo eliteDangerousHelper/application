@@ -35,20 +35,8 @@ const state: SystemState = reactive({
       name: "testFactionName"
     },
     government: "testGovernement",
-    marketId: 1234,
-    services: [
-      "Service1",
-      "Service2",
-      "Service3",
-      "Service4",
-      "Service5",
-      "Service6",
-      "Service7",
-      "Service8",
-      "Service932154865",
-      "Service10",
-      "Service11"
-    ]
+    marketId: 0,
+    services: []
   }
 });
 
