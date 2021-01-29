@@ -4,10 +4,25 @@
       <div>{{ t("components.market.id") }}: {{ market.id }}</div>
     </div>
     <div>
-      <div>{{ t("components.market.buy") }}</div>
+      <div>
+        {{ t("components.market.buy") }}
+        ({{ commoditiesInterestedPurchase.length }})
+      </div>
+      <div
+        v-for="commodity in commoditiesInterestedPurchase"
+        :key="commodity.id"
+      >
+        {{ commodity.nameLocalised }}
+      </div>
     </div>
     <div>
-      <div>{{ t("components.market.send") }}</div>
+      <div>
+        {{ t("components.market.send") }}
+        ({{ commoditiesInterestedSell.length }})
+      </div>
+      <div v-for="commodity in commoditiesInterestedSell" :key="commodity.id">
+        {{ commodity.nameLocalised }}
+      </div>
     </div>
   </div>
 </template>
@@ -16,7 +31,10 @@
 import { computed, defineComponent } from "vue";
 import marketStore from "@/store/main/market";
 import { useI18n } from "vue-i18n";
-import { getCommoditiesByInterestedPurchase } from "@/utils/market";
+import {
+  getCommoditiesByInterestedPurchase,
+  getCommoditiesByInterestedSell
+} from "@/utils/market";
 
 export default defineComponent({
   name: "Market",
@@ -24,12 +42,16 @@ export default defineComponent({
     const market = computed(() => marketStore.state);
     const { t } = useI18n();
     const commoditiesInterestedPurchase = computed(() =>
-      getCommoditiesByInterestedPurchase(marketStore.state)
+      getCommoditiesByInterestedPurchase(marketStore.state).slice(0, 15)
+    );
+    const commoditiesInterestedSell = computed(() =>
+      getCommoditiesByInterestedSell(marketStore.state).slice(0, 14)
     );
     return {
       market,
       t,
-      commoditiesInterestedPurchase
+      commoditiesInterestedPurchase,
+      commoditiesInterestedSell
     };
   }
 });

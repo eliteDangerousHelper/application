@@ -26,3 +26,9 @@ export interface CommunityGoalReward extends EventED {
   System: string;
   Reward: number;
 }
+
+export interface Market extends EventED {
+  MarketID: number;
+  StationName: string;
+  StarSystem: number;
+}

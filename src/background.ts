@@ -7,10 +7,9 @@ import { fetchOptions, writeConfig } from "./utils/options";
 import Obserser from "@/utils/observer";
 import { checkJournal, searchJournal, watchNewJournal } from "./utils/gameWatch";
 import gameStore from "./store/background/game";
+import { getCommodities } from "./utils/background/market";
 
 const obs = new Obserser();
-const marketObs = new Obserser();
-marketObs.watchFile(gameStore.state.gameDir + "Market.json")
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -23,11 +22,16 @@ ipcMain.on("write-config", (event, arg: string) => {
   writeConfig(JSON.parse(arg));
 });
 
+ipcMain.on("get-commodities", (event) => {
+  getCommodities().then((commodities) => {
+    event.reply('get-commodities-end', commodities)
+  });
+});
+
 ipcMain.on("fetch-options", (event) => {
   fetchOptions().then((options) => {
     event.reply('fetch-options-end', options);
   });
-
 });
 
 searchJournal(gameStore.state.gameDir).then((filename: string | undefined) => {
@@ -80,17 +84,6 @@ async function createWindow() {
       if (line !== "") {
         console.log("emit event", line);
         win.webContents.send("new-event", JSON.parse(line));
-      }
-    }
-  });
-
-  marketObs.on('file-updated', (log: { message: string}) => {
-    const lines = log.message.split(/\r?\n/);
-
-    for (const line of lines) {
-      if (line !== "") {
-        console.log("emit event", line);
-        win.webContents.send("add-commodities", JSON.parse(line));
       }
     }
   });

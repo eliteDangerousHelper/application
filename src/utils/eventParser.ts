@@ -1,6 +1,7 @@
 import { EventED } from '@/interfaces/events/base';
 import * as startup from "./events/startup";
 import * as travel from "./events/travel";
+import * as stationService from "./events/stationService";
 
 const eventFunction: {[name: string]: Function} = {
   "FileHeader": startup.fileheader,
@@ -15,6 +16,7 @@ const eventFunction: {[name: string]: Function} = {
   "Location": travel.location,
   "FSDJump": travel.fsdJump,
   "Docked": travel.docked,
+  "Market": stationService.market
 }
 
 export const parse = (event: EventED) => {
