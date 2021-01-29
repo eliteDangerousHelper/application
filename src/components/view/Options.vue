@@ -27,7 +27,10 @@ export default defineComponent({
       LOCALES.filter(val => val.value == optionsStore.state.lang)[0].value
     );
 
-    const actualLang = computed(() => LOCALES.filter(val => val.value == optionsStore.state.lang)[0].caption);
+    const actualLang = computed(
+      () =>
+        LOCALES.filter(val => val.value == optionsStore.state.lang)[0].caption
+    );
 
     watch(lang, () => {
       optionsStore.state.lang = lang.value;
@@ -65,23 +68,23 @@ export default defineComponent({
 }
 
 .selectbox::after {
-  font-family: 'Roboto';
-  content: 'v';
+  font-family: "Roboto";
+  content: "v";
   display: block;
   position: absolute;
   right: 20px;
   font-size: 16px;
   top: 7px;
-  color:#FFF;
+  color: #fff;
 }
 .selectbox span {
   position: absolute;
   top: 6px;
   left: 10px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-size: 16px;
-  color:#FFF;
-  font-weight:300;
+  color: #fff;
+  font-weight: 300;
 }
 select {
   width: 200px;
@@ -93,8 +96,8 @@ select {
 
 option {
   background: rgba(0, 170, 170);
-  color: #FFF;
-  font-family: 'Roboto';
+  color: #fff;
+  font-family: "Roboto";
 
   &:hover {
     background: rgba(0, 170, 170);

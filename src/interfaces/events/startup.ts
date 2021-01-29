@@ -1,4 +1,4 @@
-import { EventED } from './base';
+import { EventED } from "./base";
 
 interface Mission {
   MissionID: number;
@@ -26,8 +26,7 @@ export interface Missions extends EventED {
   Complete: Mission[];
 }
 
-export interface Shutdown extends EventED {
-}
+export type Shutdown = EventED;
 
 export interface ClearSavedGame extends EventED {
   Name: string;
@@ -49,7 +48,7 @@ export interface Reputation extends EventED {
 }
 
 export interface EngineerProgress extends EventED {
-  Engineers: Engineer[]
+  Engineers: Engineer[];
 }
 
 export interface SquadronStartup extends EventED {

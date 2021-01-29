@@ -30,4 +30,4 @@ export default {
     buy: "To buy",
     send: "To send"
   }
-}
+};

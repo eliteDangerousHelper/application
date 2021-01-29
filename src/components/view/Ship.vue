@@ -1,6 +1,10 @@
 <template>
   <div class="window ship">
-    <div>{{ t("components.ship.remainingFuel") }}: {{ ship.fuel.level }}/{{ ship.fuel.capacity }}</div>
+    <div>
+      {{ t("components.ship.remainingFuel") }}: {{ ship.fuel.level }}/{{
+        ship.fuel.capacity
+      }}
+    </div>
     <div>{{ t("components.ship.type") }}: {{ ship.type }}</div>
   </div>
 </template>

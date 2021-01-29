@@ -13,7 +13,7 @@ const state: GameState = reactive({
   gameDir:
     (app || remote.app).getPath("home") +
     "\\Saved Games\\Frontier Developments\\Elite Dangerous\\",
-  lastLine: 0,
+  lastLine: 0
 });
 
 export default { state };

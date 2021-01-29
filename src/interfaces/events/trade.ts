@@ -1,4 +1,4 @@
-import { EventED } from './base';
+import { EventED } from "./base";
 
 export interface BuyTradeData extends EventED {
   System: string;

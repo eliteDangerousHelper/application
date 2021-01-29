@@ -1,4 +1,4 @@
-import { EventED } from './base';
+import { EventED } from "./base";
 
 export interface BuyAmmo extends EventED {
   Cost: number;

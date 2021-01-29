@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, h, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import Button from "../ui/Button.vue";
 import Modal from "../ui/Modal.vue";
 import Options from "./Options.vue";
@@ -31,7 +31,7 @@ export default defineComponent({
     const closeOptions = () => {
       ipcRenderer.send("write-config", JSON.stringify(optionsStore.state));
       showOptions.value = false;
-    }
+    };
     return {
       showOptions,
       openOptions,

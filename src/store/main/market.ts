@@ -51,8 +51,7 @@ interface Commoditie {
 
 export interface MarketState {
   id: number;
-  commodities: Commoditie[]
-
+  commodities: Commoditie[];
 }
 
 const state: MarketState = reactive({
@@ -60,30 +59,32 @@ const state: MarketState = reactive({
   commodities: []
 });
 
-ipcRenderer.on('get-commodities-end', (event: IpcRendererEvent, arg: string) => {
-  const file = JSON.parse(arg) as MarketFile;
-  file.Items.forEach(el => {
-    state.commodities.push({
-      id: el.id,
-      name: el.Name,
-      nameLocalised: el.Name_Localised,
-      category: el.Category,
-      categoryLocalised: el.Category_Localised,
-      buyPrice: el.BuyPrice,
-      sellPrice: el.SellPrice,
-      meanPrice: el.MeanPrice,
-      stockBracket: el.StockBracket,
-      demandBracket: el.DemandBracket,
-      stock: el.Stock,
-      demand: el.Demand,
-      consumer: el.Consumer,
-      producer: el.Producer,
-      rare: el.Rare
-    })
-  });
-  state.id = file.MarketID
-  console.log('get-commodities-end', file.Items.length);
-  
-})
+ipcRenderer.on(
+  "get-commodities-end",
+  (event: IpcRendererEvent, arg: string) => {
+    const file = JSON.parse(arg) as MarketFile;
+    file.Items.forEach(el => {
+      state.commodities.push({
+        id: el.id,
+        name: el.Name,
+        nameLocalised: el.Name_Localised,
+        category: el.Category,
+        categoryLocalised: el.Category_Localised,
+        buyPrice: el.BuyPrice,
+        sellPrice: el.SellPrice,
+        meanPrice: el.MeanPrice,
+        stockBracket: el.StockBracket,
+        demandBracket: el.DemandBracket,
+        stock: el.Stock,
+        demand: el.Demand,
+        consumer: el.Consumer,
+        producer: el.Producer,
+        rare: el.Rare
+      });
+    });
+    state.id = file.MarketID;
+    console.log("get-commodities-end", file.Items.length);
+  }
+);
 
 export default { state };

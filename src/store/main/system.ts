@@ -6,8 +6,8 @@ interface Station {
   faction: {
     name: string;
     factionState: string;
-  },
-  government: string,
+  };
+  government: string;
   services: string[];
   economy: string;
   marketId: number;

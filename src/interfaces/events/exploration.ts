@@ -1,4 +1,4 @@
-import { EventED } from './base';
+import { EventED } from "./base";
 
 interface Ring {
   Name: string;
@@ -14,8 +14,8 @@ interface Material {
 }
 
 export interface Scan extends EventED {
-  Bodyname : string;
-  DistanceFromArrivalLS : number;
+  Bodyname: string;
+  DistanceFromArrivalLS: number;
   Rings?: Ring[];
 }
 
@@ -31,7 +31,7 @@ export interface ScanStar extends Scan {
 
 export interface ScanPlanet extends Scan {
   TidalLock: boolean;
-  TerraformState: "Terraformable"|"Terraforming"|"Terraformed"|null;
+  TerraformState: "Terraformable" | "Terraforming" | "Terraformed" | null;
   PlanetClass: string;
   Atmosphere: string;
   Volcanism: string;
@@ -44,19 +44,19 @@ export interface ScanPlanet extends Scan {
 }
 
 export interface MaterialCollected extends EventED {
-  Category: "Raw"|"Encoded"|"Manufactured";
+  Category: "Raw" | "Encoded" | "Manufactured";
   Name: string;
   Count: number;
 }
 
 export interface MaterialDiscarded extends EventED {
-  Category: "Raw"|"Encoded"|"Manufactured";
+  Category: "Raw" | "Encoded" | "Manufactured";
   Name: string;
   Count: number;
 }
 
 export interface MaterialDiscovered extends EventED {
-  Category: "Raw"|"Encoded"|"Manufactured";
+  Category: "Raw" | "Encoded" | "Manufactured";
   Name: string;
   DiscoveryNumber: number;
 }

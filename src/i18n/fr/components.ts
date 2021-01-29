@@ -30,4 +30,4 @@ export default {
     buy: "A acheter",
     send: "A vendre"
   }
-}
+};

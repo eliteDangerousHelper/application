@@ -1,4 +1,4 @@
-import { Docked, FSDJump, Location } from '@/interfaces/events/travel';
+import { Docked, FSDJump, Location } from "@/interfaces/events/travel";
 import systemStore from "@/store/main/system";
 
 export const location = (event: Location) => {
@@ -6,7 +6,8 @@ export const location = (event: Location) => {
   systemStore.state.population = event.Population;
   systemStore.state.security = event.SystemSecurity_Localised;
   systemStore.state.economy = event.SystemEconomy_Localised;
-  systemStore.state.allegiance = event.SystemAllegiance === ''  ? undefined : event.SystemAllegiance;
+  systemStore.state.allegiance =
+    event.SystemAllegiance === "" ? undefined : event.SystemAllegiance;
 
   if (event.Docked) {
     systemStore.state.dockedStation = {
@@ -23,16 +24,17 @@ export const location = (event: Location) => {
   } else {
     systemStore.state.dockedStation = undefined;
   }
-}
+};
 
 export const fsdJump = (event: FSDJump) => {
   systemStore.state.name = event.StarSystem;
-  systemStore.state.allegiance = event.SystemAllegiance === ''  ? undefined : event.SystemAllegiance;
+  systemStore.state.allegiance =
+    event.SystemAllegiance === "" ? undefined : event.SystemAllegiance;
   systemStore.state.dockedStation = undefined;
   systemStore.state.economy = event.SystemEconomy_Localised;
   systemStore.state.population = event.Population;
   systemStore.state.security = event.SystemSecondEconomy_Localised;
-}
+};
 
 export const docked = (event: Docked) => {
   systemStore.state.dockedStation = {
@@ -47,4 +49,4 @@ export const docked = (event: Docked) => {
     services: event.StationServices,
     marketId: event.MarketID
   };
-}
+};

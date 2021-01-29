@@ -175,11 +175,11 @@ export default defineComponent({
       }
 
       &.allied {
-        background-color:#1989fa;
+        background-color: #1989fa;
         background-image: linear-gradient(
           center bottom,
-         #1989fa 37%,
-         #166ec7 69%
+          #1989fa 37%,
+          #166ec7 69%
         );
       }
     }

@@ -14,7 +14,9 @@ import { useI18n } from "vue-i18n";
 export default defineComponent({
   name: "DockedStationServices",
   setup() {
-    const services = computed(() => systemStore.state.dockedStation?.services.slice(0,9));
+    const services = computed(() =>
+      systemStore.state.dockedStation?.services.slice(0, 9)
+    );
     const { t } = useI18n();
     return {
       services,

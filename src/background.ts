@@ -5,7 +5,11 @@ import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { fetchOptions, writeConfig } from "./utils/options";
 import Obserser from "@/utils/observer";
-import { checkJournal, searchJournal, watchNewJournal } from "./utils/gameWatch";
+import {
+  checkJournal,
+  searchJournal,
+  watchNewJournal
+} from "./utils/gameWatch";
 import gameStore from "./store/background/game";
 import { getCommodities } from "./utils/background/market";
 
@@ -22,15 +26,15 @@ ipcMain.on("write-config", (event, arg: string) => {
   writeConfig(JSON.parse(arg));
 });
 
-ipcMain.on("get-commodities", (event) => {
-  getCommodities().then((commodities) => {
-    event.reply('get-commodities-end', commodities)
+ipcMain.on("get-commodities", event => {
+  getCommodities().then(commodities => {
+    event.reply("get-commodities-end", commodities);
   });
 });
 
-ipcMain.on("fetch-options", (event) => {
-  fetchOptions().then((options) => {
-    event.reply('fetch-options-end', options);
+ipcMain.on("fetch-options", event => {
+  fetchOptions().then(options => {
+    event.reply("fetch-options-end", options);
   });
 });
 
@@ -44,7 +48,6 @@ searchJournal(gameStore.state.gameDir).then((filename: string | undefined) => {
         obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
       } else {
         console.error("unvalid file", path);
-        
       }
     });
   } else {
@@ -77,7 +80,7 @@ async function createWindow() {
     win.loadURL("app://./index.html");
   }
 
-  obs.on('file-updated', (log: { message: string }) => {
+  obs.on("file-updated", (log: { message: string }) => {
     const lines = log.message.split(/\r?\n/);
 
     for (const line of lines) {

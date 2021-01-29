@@ -1,4 +1,4 @@
-import { EventED } from './base';
+import { EventED } from "./base";
 
 interface StationEconomie {
   Name: string;
@@ -11,7 +11,7 @@ interface RecoveringState {
   Trend: number;
 }
 
-interface ActiveState{
+interface ActiveState {
   State: string;
 }
 
@@ -26,8 +26,8 @@ interface Faction {
   MyReputation: number;
   RecoveringStates?: RecoveringState[];
   ActiveStates?: ActiveState[];
-  SquadronFaction?: boolean,
-  HomeSystem?: boolean,
+  SquadronFaction?: boolean;
+  HomeSystem?: boolean;
 }
 
 interface Conflict {
@@ -37,12 +37,12 @@ interface Conflict {
     Name: string;
     Stake: string;
     WonDays: number;
-  },
+  };
   Faction2: {
     Name: string;
     Stake: string;
     WonDays: number;
-  }
+  };
 }
 
 export interface Docked extends EventED {
@@ -57,7 +57,7 @@ export interface Docked extends EventED {
   StationGovernment_Localised: string;
   StationSecurity: string;
   StationServices: string[];
-  StationEconomies: StationEconomie[]
+  StationEconomies: StationEconomie[];
   DistFromStarLS: number;
   MarketID: number;
   SystemAddress: number;
@@ -120,9 +120,9 @@ export interface Location extends EventED {
   StationFaction: {
     Name: string;
     FactionState: string;
-  },
-  StationGovernment: string,
-  StationGovernment_Localised: string,
+  };
+  StationGovernment: string;
+  StationGovernment_Localised: string;
   StationServices: string[];
   StationEconomy: string;
   StationEconomy_Localised: string;
@@ -147,7 +147,7 @@ export interface Location extends EventED {
   SystemFaction: {
     Name: string;
     FactionState: string;
-  },
+  };
   Conflicts: Conflict[];
 }
 

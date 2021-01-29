@@ -10,9 +10,9 @@ interface FileInfo {
 
 const getLines = (path: string): string[] => {
   const data: string = readFileSync(path, "utf8");
-  
+
   return data.split(/\r?\n/);
-}
+};
 
 const getLastLine = (path: string): string | undefined => {
   const lines = getLines(path);
@@ -30,8 +30,8 @@ const getLastLine = (path: string): string | undefined => {
 };
 
 export const checkJournal = (path: string) => {
-  console.log('checkJournal', path);
-  
+  console.log("checkJournal", path);
+
   const lastLine = getLastLine(path);
 
   return !(lastLine === undefined || JSON.parse(lastLine).event === "Shutdown");
@@ -46,7 +46,7 @@ export const watchNewJournal = (folder: string): FSWatcher => {
   return watcher
     .on("add", (path: string) => {
       console.log(`File ${path} has been added`);
-      
+
       if (!path.match(regexJournal)) {
         watcher.unwatch(path);
         console.log(`File ${path} has been unwatch`);
@@ -71,7 +71,7 @@ export const searchJournal = async (
 
   if (files.length) {
     journal = files[0].name;
-    if (!(checkJournal(folder + journal))) {
+    if (!checkJournal(folder + journal)) {
       journal = undefined;
     }
   }

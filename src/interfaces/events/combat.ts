@@ -1,4 +1,4 @@
-import { EventED } from './base';
+import { EventED } from "./base";
 
 interface Reward {
   Faction: string;
@@ -41,11 +41,9 @@ export interface FactionKillBond extends EventED {
   VictimFaction: string;
 }
 
-export interface HeatDamage extends EventED {
-}
+export type HeatDamage = EventED;
 
-export interface HeatWarning extends EventED {
-}
+export type HeatWarning = EventED;
 
 export interface HullDamage extends EventED {
   Health: number;
@@ -57,7 +55,7 @@ export interface Interdicted extends EventED {
   IsPlayer: boolean;
   CombatRank?: number;
   Faction?: string;
-  Power?: boolean
+  Power?: boolean;
 }
 
 export interface PVPKill extends EventED {
@@ -66,5 +64,5 @@ export interface PVPKill extends EventED {
 }
 
 export interface ShieldState extends EventED {
-  ShieldsUp : boolean;
+  ShieldsUp: boolean;
 }

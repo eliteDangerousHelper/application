@@ -14,12 +14,12 @@ export interface CommanderState {
   reputation: {
     empire: number;
     federation: number;
-  },
-  engineers: Engineers[],
+  };
+  engineers: Engineers[];
   squadron?: {
     name: string;
     rank: number;
-  }
+  };
 }
 
 const state: CommanderState = reactive({
@@ -29,9 +29,9 @@ const state: CommanderState = reactive({
   loan: 0,
   reputation: {
     empire: 0,
-    federation: 0,
+    federation: 0
   },
-  engineers: [],
+  engineers: []
 });
 
 export default { state };

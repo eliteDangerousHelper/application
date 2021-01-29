@@ -16,7 +16,7 @@ export interface MissionsState {
 const state: MissionsState = reactive({
   active: [],
   failed: [],
-  complete: [],
+  complete: []
 });
 
 export default { state };
