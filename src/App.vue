@@ -1,5 +1,5 @@
 <template>
-  <div v-if="launch" class="main">
+  <div v-if="true" class="main">
     <Ranks></Ranks>
     <Reputations></Reputations>
     <Actions></Actions>
@@ -12,7 +12,10 @@
     <Market></Market>
     <SystemScan></SystemScan>
   </div>
-  <Loader v-else></Loader>
+  <div v-else class="main-waiting">
+    <Loader></Loader>
+    <Actions></Actions>
+  </div>
 </template>
 
 <script lang="ts">
@@ -87,6 +90,27 @@ body {
   align-items: center;
   justify-items: center;
   height: 100vh;
+}
+
+.main-waiting {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+  height: 100vh;
+
+  .actions {
+    grid-area: initial;
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .loader {
+    grid-area: initial;
+    grid-column: 2;
+    grid-row: 2;
+  }
 }
 
 #app {

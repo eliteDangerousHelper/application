@@ -1,7 +1,6 @@
 <template>
   <div class="window5 actions">
     <Button @click="openOptions">options</Button>
-    <Button>param</Button>
     <Modal v-if="showOptions" @close="closeOptions">
       <template v-slot:default>
         <Options></Options>
@@ -50,8 +49,17 @@ export default defineComponent({
 .actions {
   grid-area: actions;
 }
+
 .item {
   margin-right: 40px;
   margin-top: 15px;
+}
+</style>
+
+<style lang="scss">
+.actions {
+  .modal-container {
+    height: 260px;
+  }
 }
 </style>

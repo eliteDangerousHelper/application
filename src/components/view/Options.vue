@@ -1,31 +1,43 @@
 <template>
-  <div>
-    <div class="selectbox">
-      <span>{{ actualLang }}</span>
-      <select class="selectstyled" v-model="lang" placeholder="Select">
-        <option
-          v-for="item in LOCALES"
-          :key="item.value"
-          :label="item.caption"
-          :value="item.value"
-        >
-        </option>
-      </select>
-    </div>
+  <div class="selectbox">
+    <span>{{ actualLang }}</span>
+    <select class="selectstyled" v-model="lang" placeholder="Select">
+      <option
+        v-for="item in LOCALES"
+        :key="item.value"
+        :label="item.caption"
+        :value="item.value"
+      >
+      </option>
+    </select>
   </div>
+  <div>{{ gameDir }}</div>
+  <Button @click.prevent="selectDir">Changer de dossier</Button>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
 import { LOCALES } from "@/i18n/locales";
 import optionsStore from "@/store/main/options";
+import Button from "../ui/Button.vue";
+
+const { ipcRenderer } = window.require("electron");
 
 export default defineComponent({
   name: "Options",
+  components: {
+    Button
+  },
   setup() {
     const lang = ref(
       LOCALES.filter(val => val.value == optionsStore.state.lang)[0].value
     );
+
+    const gameDir = computed(() => optionsStore.state.gameDir);
+
+    const selectDir = () => {
+      ipcRenderer.send("select-gamedir");
+    };
 
     const actualLang = computed(
       () =>
@@ -39,7 +51,9 @@ export default defineComponent({
     return {
       lang,
       LOCALES,
-      actualLang
+      actualLang,
+      gameDir,
+      selectDir
     };
   }
 });

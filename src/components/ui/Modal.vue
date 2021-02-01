@@ -60,7 +60,7 @@ export default defineComponent({
   padding: 20px 30px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 20px 1fr 20px;
+  grid-template-rows: 20px 1fr 35px;
   background: linear-gradient(rgb(1, 55, 77), rgb(0, 112, 134));
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);

@@ -1,9 +1,9 @@
 "use strict";
 
-import { app, protocol, BrowserWindow, ipcMain } from "electron";
+import { app, protocol, BrowserWindow, ipcMain, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import { fetchOptions, writeConfig } from "./utils/options";
+import { fetchOptions, writeConfig } from "./utils/background/options";
 import Obserser from "@/utils/observer";
 import {
   checkJournal,
@@ -69,6 +69,35 @@ async function createWindow() {
 
   win.setMenu(null);
   win.maximize();
+
+  ipcMain.on('select-gamedir', async (event) => {
+    const result = await dialog.showOpenDialog(win, {
+      properties: ['openDirectory']
+    })
+    if (result.filePaths.length > 0) {
+      gameStore.state.gameDir = result.filePaths[0];
+      searchJournal(gameStore.state.gameDir).then((filename: string | undefined) => {
+        gameStore.state.journal = filename;
+        if (!gameStore.state.journal) {
+          watchNewJournal(gameStore.state.gameDir).on("add", path => {
+            const valid = checkJournal(path);
+            if (valid) {
+              gameStore.state.journal = path.replace(gameStore.state.gameDir, "");
+              obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
+            } else {
+              console.error("unvalid file", path);
+            }
+          });
+        } else {
+          obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
+        }
+      });
+
+      fetchOptions().then(options => {
+        event.reply("fetch-options-end", options);
+      });
+    }
+  })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
