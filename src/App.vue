@@ -5,7 +5,7 @@
     <Actions></Actions>
     <Commander></Commander>
     <System></System>
-    <DockedStation></DockedStation>
+    <DockedStation v-if="dockedStation"></DockedStation>
     <DockedStationServices v-if="dockedStation"></DockedStationServices>
     <Ship></Ship>
     <Alert></Alert>

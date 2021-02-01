@@ -16,6 +16,7 @@ const eventFunction: { [name: string]: Function } = {
   Location: travel.location,
   FSDJump: travel.fsdJump,
   Docked: travel.docked,
+  Undocked: travel.undocked,
   Market: stationService.market
 };
 

@@ -1,5 +1,6 @@
-import { Docked, FSDJump, Location } from "@/interfaces/events/travel";
+import { Docked, FSDJump, Location, Undocked } from "@/interfaces/events/travel";
 import systemStore from "@/store/main/system";
+import marketStore from "@/store/main/market";
 
 export const location = (event: Location) => {
   systemStore.state.name = event.StarSystem;
@@ -50,3 +51,9 @@ export const docked = (event: Docked) => {
     marketId: event.MarketID
   };
 };
+
+export const undocked = (event: Undocked) => {
+  marketStore.state.commodities = [];
+  systemStore.state.dockedStation = undefined;
+  
+}

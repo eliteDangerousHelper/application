@@ -27,17 +27,6 @@ const state: SystemState = reactive({
   security: "",
   population: 0,
   economy: "",
-  dockedStation: {
-    name: "test",
-    economy: "testEco",
-    faction: {
-      factionState: "testFactionState",
-      name: "testFactionName"
-    },
-    government: "testGovernement",
-    marketId: 0,
-    services: []
-  }
 });
 
 export default { state };
