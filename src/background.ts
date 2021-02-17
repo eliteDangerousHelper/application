@@ -3,17 +3,10 @@
 import { app, protocol, BrowserWindow, ipcMain, dialog } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
-import { fetchOptions, writeConfig } from "./utils/background/options";
-import Obserser from "@/utils/observer";
-import {
-  checkJournal,
-  searchJournal,
-  watchNewJournal
-} from "./utils/gameWatch";
-import gameStore from "./store/background/game";
-import { getCommodities } from "./utils/background/market";
-
-const obs = new Obserser();
+import { fetchOptions, writeConfig } from "@/utils/background/options";
+import gameStore from "@/store/background/game";
+import { getCommodities } from "@/utils/background/market";
+import { initializeJournal, journalObserver } from "@/utils/background/journal";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -38,22 +31,7 @@ ipcMain.on("fetch-options", event => {
   });
 });
 
-searchJournal(gameStore.state.gameDir).then((filename: string | undefined) => {
-  gameStore.state.journal = filename;
-  if (!gameStore.state.journal) {
-    watchNewJournal(gameStore.state.gameDir).on("add", path => {
-      const valid = checkJournal(path);
-      if (valid) {
-        gameStore.state.journal = path.replace(gameStore.state.gameDir, "");
-        obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
-      } else {
-        console.error("unvalid file", path);
-      }
-    });
-  } else {
-    obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
-  }
-});
+initializeJournal();
 
 async function createWindow() {
   // Create the browser window.
@@ -76,22 +54,7 @@ async function createWindow() {
     })
     if (result.filePaths.length > 0) {
       gameStore.state.gameDir = result.filePaths[0];
-      searchJournal(gameStore.state.gameDir).then((filename: string | undefined) => {
-        gameStore.state.journal = filename;
-        if (!gameStore.state.journal) {
-          watchNewJournal(gameStore.state.gameDir).on("add", path => {
-            const valid = checkJournal(path);
-            if (valid) {
-              gameStore.state.journal = path.replace(gameStore.state.gameDir, "");
-              obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
-            } else {
-              console.error("unvalid file", path);
-            }
-          });
-        } else {
-          obs.watchFile(gameStore.state.gameDir + gameStore.state.journal);
-        }
-      });
+      initializeJournal();
 
       fetchOptions().then(options => {
         event.reply("fetch-options-end", options);
@@ -109,12 +72,11 @@ async function createWindow() {
     win.loadURL("app://./index.html");
   }
 
-  obs.on("file-updated", (log: { message: string }) => {
+  journalObserver.on("file-updated", (log: { message: string }) => {
     const lines = log.message.split(/\r?\n/);
 
     for (const line of lines) {
       if (line !== "") {
-        console.log("emit event", line);
         win.webContents.send("new-event", JSON.parse(line));
       }
     }
