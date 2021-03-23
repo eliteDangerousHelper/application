@@ -5,7 +5,7 @@
       {{ t("components.system.allegency") }}:
       {{ system.allegiance ?? "indépendant" }}
     </div>
-    <div>{{ t("components.system.population") }}: {{ system.population }}</div>
+    <div>{{ t("components.system.population") }}: {{ population }}</div>
     <div>{{ t("components.system.economy") }}: {{ system.economy }}</div>
   </div>
 </template>
@@ -20,9 +20,13 @@ export default defineComponent({
   setup() {
     const system = computed(() => systemStore.state);
     const { t } = useI18n();
+    const population = computed(() =>
+      new Intl.NumberFormat().format(systemStore.state.population)
+    );
     return {
       system,
-      t
+      t,
+      population
     };
   }
 });
