@@ -17,7 +17,9 @@ const eventFunction: { [name: string]: Function } = {
   FSDJump: travel.fsdJump,
   Docked: travel.docked,
   Undocked: travel.undocked,
-  Market: stationService.market
+  Market: stationService.market,
+  Cargo: travel.cargo,
+  Loadout: startup.loadout
 };
 
 export const parse = (event: EventED) => {

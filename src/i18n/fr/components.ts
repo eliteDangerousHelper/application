@@ -22,6 +22,7 @@ export default {
   ship: {
     ship: "Vaisseau",
     remainingFuel: "Carburant restant",
+    cargo: "Cargo",
     type: "Type"
   },
   market: {

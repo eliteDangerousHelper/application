@@ -4,6 +4,7 @@ import {
   EngineerProgress,
   Heading,
   LoadGame,
+  Loadout,
   Missions,
   Progress,
   Rank,
@@ -132,3 +133,7 @@ export const rank = (event: Rank) => {
   rankStore.state.Federation.level = event.Federation;
   rankStore.state.Trade.level = event.Trade;
 };
+
+export const loadout = (event: Loadout) => {
+  shipStore.state.cargo.capacity = event.CargoCapacity
+}

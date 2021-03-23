@@ -1,6 +1,7 @@
-import { Docked, FSDJump, Location, Undocked } from "@/interfaces/events/travel";
+import { Cargo, Docked, FSDJump, Location, Undocked } from "@/interfaces/events/travel";
 import systemStore from "@/store/main/system";
 import marketStore from "@/store/main/market";
+import ship from "@/store/main/ship";
 
 export const location = (event: Location) => {
   systemStore.state.name = event.StarSystem;
@@ -55,5 +56,8 @@ export const docked = (event: Docked) => {
 export const undocked = (event: Undocked) => {
   marketStore.state.commodities = [];
   systemStore.state.dockedStation = undefined;
-  
+}
+
+export const cargo = (event: Cargo) => {
+  ship.state.cargo.used = event.Count
 }

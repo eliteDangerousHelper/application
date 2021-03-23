@@ -5,6 +5,11 @@
         ship.fuel.capacity
       }}
     </div>
+    <div>
+      {{ t("components.ship.cargo") }}: {{ ship.cargo.used }}/{{
+        ship.cargo.capacity
+      }}
+    </div>
     <div>{{ t("components.ship.type") }}: {{ ship.type }}</div>
   </div>
 </template>

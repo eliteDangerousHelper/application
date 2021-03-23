@@ -9,6 +9,10 @@ export interface ShipState {
     level: number;
     capacity: number;
   };
+  cargo: {
+    used: number;
+    capacity: number;
+  };
 }
 
 const state: ShipState = reactive({
@@ -18,6 +22,10 @@ const state: ShipState = reactive({
   indent: "",
   fuel: {
     level: 0,
+    capacity: 0
+  },
+  cargo: {
+    used: 0,
     capacity: 0
   }
 });

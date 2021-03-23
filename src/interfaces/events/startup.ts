@@ -14,6 +14,31 @@ export interface Heading extends EventED {
   build: string;
 }
 
+export interface Loadout extends EventED {
+  "Ship": string;
+  "ShipID": number;
+  "ShipName": string;
+  "ShipIdent": string;
+  "HullValue": number;
+  "ModulesValue": number;
+  "HullHealth": number;
+  "UnladenMass": number;
+  "CargoCapacity": number;
+  "MaxJumpRange": number;
+  "FuelCapacity": {
+    "Main": number;
+    "Reserve": number;
+  };
+  "Rebuy": number;
+  "Modules":{
+    "Slot": string;
+    "Item": string;
+    "On": boolean;
+    "Priority": number;
+    "Health": number;
+  }[]
+}
+
 export interface Engineer {
   Engineer: string;
   EngineerID: number;

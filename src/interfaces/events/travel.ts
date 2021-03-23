@@ -15,6 +15,10 @@ interface ActiveState {
   State: string;
 }
 
+export interface Cargo extends EventED {
+  Count: number;
+}
+
 interface Faction {
   Name: string;
   FactionState: string;
