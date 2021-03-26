@@ -20,6 +20,10 @@ export interface CommanderState {
     name: string;
     rank: number;
   };
+  message?: {
+    from: string;
+    message: string;
+  };
 }
 
 const state: CommanderState = reactive({
@@ -31,7 +35,7 @@ const state: CommanderState = reactive({
     empire: 0,
     federation: 0
   },
-  engineers: []
+  engineers: [],
 });
 
 export default { state };

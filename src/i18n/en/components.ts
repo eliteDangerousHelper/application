@@ -30,5 +30,8 @@ export default {
     id: "id",
     buy: "To buy",
     send: "To send"
+  },
+  message: {
+    from: "From"
   }
 };

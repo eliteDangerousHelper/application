@@ -8,6 +8,7 @@ import {
   Missions,
   Progress,
   Rank,
+  ReceiveText,
   Reputation,
   SquadronStartup
 } from "@/interfaces/events/startup";
@@ -25,6 +26,21 @@ export const commander = (event: Commander) => {
   commanderStore.state.name = event.Name;
   commanderStore.state.fid = event.FID;
 };
+
+export const receiveText = (event: ReceiveText) => {
+  const channelListening = [
+    'squadron',
+    'wing',
+    'player'
+  ];
+
+  if (channelListening.indexOf(event.Channel) !== -1) {
+    commanderStore.state.message = {
+      from: event.From,
+      message: event.Message
+    }
+  }
+}
 
 export const loadGame = (event: LoadGame) => {
   commanderStore.state.fid = event.FID;

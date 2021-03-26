@@ -39,7 +39,15 @@ export interface Loadout extends EventED {
   }[]
 }
 
-export interface Engineer {
+export interface ReceiveText extends EventED {
+  "From": string;
+  "From_Localised"?: string;
+  "Message": string;
+  "Message_Localised"?: string;
+  "Channel": string;
+}
+
+export interface Engineer extends EventED {
   Engineer: string;
   EngineerID: number;
   Progress: string;

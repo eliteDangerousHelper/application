@@ -8,7 +8,7 @@
     <DockedStation v-if="dockedStation"></DockedStation>
     <DockedStationServices v-if="dockedStation"></DockedStationServices>
     <Ship></Ship>
-    <Alert></Alert>
+    <Message></Message>
     <Market></Market>
     <SystemScan></SystemScan>
   </div>
@@ -30,7 +30,7 @@ import SystemScan from "@/components/view/SystemScan.vue";
 import DockedStation from "@/components/view/DockedStation.vue";
 import DockedStationServices from "@/components/view/DockedStationServices.vue";
 import Commander from "@/components/view/Commander.vue";
-import Alert from "@/components/view/Alert.vue";
+import Message from "@/components/view/Message.vue";
 import Ranks from "@/components/view/Ranks.vue";
 import gameStore from "@/store/main/game";
 import systemStore from "@/store/main/system";
@@ -45,7 +45,7 @@ export default defineComponent({
     DockedStation,
     DockedStationServices,
     Commander,
-    Alert,
+    Message,
     Actions,
     Market,
     SystemScan,
@@ -85,7 +85,7 @@ body {
   grid-template-rows: repeat(2, 1fr) 2fr;
   grid-template-areas:
     "ranks ranks ranks reputations reputations actions"
-    "commander system docked-station docked-station-services ship alert"
+    "commander system docked-station docked-station-services ship message"
     "market market market system-scan system-scan system-scan";
   align-items: center;
   justify-items: center;
