@@ -20,18 +20,18 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import Loader from "@/components/view/Loader.vue";
-import System from "@/components/view/System.vue";
-import Actions from "@/components/view/Actions.vue";
-import Reputations from "@/components/view/Reputations.vue";
-import Ship from "@/components/view/Ship.vue";
-import Market from "@/components/view/Market.vue";
-import SystemScan from "@/components/view/SystemScan.vue";
-import DockedStation from "@/components/view/DockedStation.vue";
-import DockedStationServices from "@/components/view/DockedStationServices.vue";
-import Commander from "@/components/view/Commander.vue";
-import Message from "@/components/view/Message.vue";
-import Ranks from "@/components/view/Ranks.vue";
+import Loader from "@/components/block/Loader.vue";
+import System from "@/components/block/System.vue";
+import Actions from "@/components/block/Actions.vue";
+import Reputations from "@/components/block/Reputations.vue";
+import Ship from "@/components/block/Ship.vue";
+import Market from "@/components/block/Market.vue";
+import SystemScan from "@/components/block/SystemScan.vue";
+import DockedStation from "@/components/block/DockedStation.vue";
+import DockedStationServices from "@/components/block/DockedStationServices.vue";
+import Commander from "@/components/block/Commander.vue";
+import Message from "@/components/block/Message.vue";
+import Ranks from "@/components/block/Ranks.vue";
 import gameStore from "@/store/main/game";
 import systemStore from "@/store/main/system";
 
