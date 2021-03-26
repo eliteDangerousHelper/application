@@ -5,12 +5,14 @@ export interface GameState {
   horizons: boolean;
   mode: string;
   group?: string;
+  gameMode: "Combat" | "Exploration" | "Mining" | "Station"
 }
 
 const state: GameState = reactive({
   launch: false,
   horizons: true,
-  mode: "Solo"
+  mode: "Solo",
+  gameMode: "Exploration"
 });
 
 export default { state };

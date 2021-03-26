@@ -1,5 +1,6 @@
 import { Cargo, Docked, FSDJump, Location, Undocked } from "@/interfaces/events/travel";
 import systemStore from "@/store/main/system";
+import gameStore from "@/store/main/game";
 import marketStore from "@/store/main/market";
 import ship from "@/store/main/ship";
 
@@ -12,6 +13,7 @@ export const location = (event: Location) => {
     event.SystemAllegiance === "" ? undefined : event.SystemAllegiance;
 
   if (event.Docked) {
+    gameStore.state.gameMode = "Station";
     systemStore.state.dockedStation = {
       name: event.StationName,
       economy: event.StationEconomy_Localised,
@@ -24,11 +26,13 @@ export const location = (event: Location) => {
       marketId: event.MarketID
     };
   } else {
+    gameStore.state.gameMode = "Exploration";
     systemStore.state.dockedStation = undefined;
   }
 };
 
 export const fsdJump = (event: FSDJump) => {
+  gameStore.state.gameMode = "Exploration";
   systemStore.state.name = event.StarSystem;
   systemStore.state.allegiance =
     event.SystemAllegiance === "" ? undefined : event.SystemAllegiance;
@@ -39,6 +43,7 @@ export const fsdJump = (event: FSDJump) => {
 };
 
 export const docked = (event: Docked) => {
+  gameStore.state.gameMode = "Station";
   systemStore.state.dockedStation = {
     name: event.StationName,
     type: event.StationType,
@@ -54,6 +59,7 @@ export const docked = (event: Docked) => {
 };
 
 export const undocked = (event: Undocked) => {
+  gameStore.state.gameMode = "Exploration";
   marketStore.state.commodities = [];
   systemStore.state.dockedStation = undefined;
 }

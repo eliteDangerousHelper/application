@@ -9,8 +9,7 @@
     <DockedStationServices v-if="dockedStation"></DockedStationServices>
     <Ship></Ship>
     <Message></Message>
-    <Market></Market>
-    <SystemScan></SystemScan>
+    <component :is="mode"></component>
   </div>
   <div v-else class="main-waiting">
     <Loader></Loader>
@@ -34,6 +33,10 @@ import Message from "@/components/block/Message.vue";
 import Ranks from "@/components/block/Ranks.vue";
 import gameStore from "@/store/main/game";
 import systemStore from "@/store/main/system";
+import Combat from "@/components/mode/Combat.vue";
+import Exploration from "@/components/mode/Exploration.vue";
+import Mining from "@/components/mode/Mining.vue";
+import Station from "@/components/mode/Station.vue";
 
 export default defineComponent({
   name: "App",
@@ -49,12 +52,17 @@ export default defineComponent({
     Actions,
     Market,
     SystemScan,
-    Reputations
+    Reputations,
+    Combat,
+    Exploration,
+    Mining,
+    Station
   },
   setup() {
     const dockedStation = ref(systemStore.state.dockedStation !== undefined);
     const launch = computed(() => gameStore.state.launch);
     const span = ref(6);
+    const mode = computed(() => gameStore.state.gameMode);
 
     if (dockedStation.value) {
       span.value = 4;
@@ -63,7 +71,8 @@ export default defineComponent({
     return {
       span,
       dockedStation,
-      launch
+      launch,
+      mode
     };
   }
 });
@@ -86,7 +95,7 @@ body {
   grid-template-areas:
     "ranks ranks ranks reputations reputations actions"
     "commander system docked-station docked-station-services ship message"
-    "market market market system-scan system-scan system-scan";
+    "mode mode mode mode mode mode";
   align-items: center;
   justify-items: center;
   height: 100vh;
