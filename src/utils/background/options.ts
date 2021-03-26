@@ -6,7 +6,7 @@ import optionsStore from "@/store/background/game";
 const configPath = join((app || remote.app).getPath("userData"), "config");
 const confBasePath = join(configPath, "options.json");
 
-export const writeConfig = async (data: string) => {
+export const writeConfig = async (data: object) => {
   writeFileSync(confBasePath, JSON.stringify(data));
 };
 
@@ -19,6 +19,7 @@ export const fetchOptions = async (): Promise<string> => {
   try {
     const data = readFileSync(confBasePath, { flag: "r", encoding: "utf8" });
     const options = JSON.parse(data);
+    
     if (options.lang) {
       defaultOptionsStore.lang = options.lang;
     }
@@ -29,7 +30,7 @@ export const fetchOptions = async (): Promise<string> => {
   } catch (error) {
     mkdirSync(configPath);
   }
-  writeConfig(JSON.stringify(defaultOptionsStore));
+  writeConfig(defaultOptionsStore);
 
   return JSON.stringify(defaultOptionsStore);
 };
