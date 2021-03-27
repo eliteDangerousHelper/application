@@ -32,3 +32,31 @@ export interface Market extends EventED {
   StationName: string;
   StarSystem: number;
 }
+
+export interface MissionAbandoned extends EventED {
+  Name: string;
+  MissionID: number;
+}
+
+export interface MissionAccepted extends EventED {
+  Name: string;
+  LocalisedName: string;
+  Faction: string;
+  MissionID: number;
+  TargetFaction: string;
+  KillCount: number;
+  DestinationSystem: string;
+  DestinationStation: string;
+  Expiry: string;
+  Wing: boolean;
+  Influence: string;
+  Reputation: string;
+  Reward: number;
+}
+
+export interface MissionCompleted extends EventED {
+  Name: string;
+  MissionID: number;
+  Faction: string;
+  Reward: number;
+}

@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 
 interface Mission {
   id: number;
@@ -19,4 +19,7 @@ const state: MissionsState = reactive({
   complete: []
 });
 
-export default { state };
+const getActiveMissions = computed(() => state.active.sort((a, b) => a.expires - b.expires));
+const getCompleteMissions = computed(() => state.complete.sort((a, b) => a.expires - b.expires));
+
+export default { state, getActiveMissions, getCompleteMissions };

@@ -33,5 +33,9 @@ export default {
   },
   message: {
     from: "From"
+  },
+  missions: {
+    active: "Active",
+    complete: "Complete"
   }
 };

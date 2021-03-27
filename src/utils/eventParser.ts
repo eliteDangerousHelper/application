@@ -19,7 +19,11 @@ const eventFunction: { [name: string]: Function } = {
   Undocked: travel.undocked,
   Market: stationService.market,
   Cargo: travel.cargo,
-  Loadout: startup.loadout
+  Loadout: startup.loadout,
+  Missions: startup.missions,
+  MissionAccepted: stationService.missionAccepted,
+  MissionCompleted: stationService.missionCompleted,
+  MissionAbandoned: stationService.missionAbandoned,
 };
 
 export const parse = (event: EventED) => {

@@ -5,8 +5,8 @@
     <Actions></Actions>
     <Commander></Commander>
     <System></System>
-    <DockedStation v-if="dockedStation"></DockedStation>
-    <DockedStationServices v-if="dockedStation"></DockedStationServices>
+    <MissionsActive></MissionsActive>
+    <MissionsComplete></MissionsComplete>
     <Ship></Ship>
     <Message></Message>
     <component :is="mode"></component>
@@ -30,6 +30,8 @@ import DockedStation from "@/components/block/DockedStation.vue";
 import DockedStationServices from "@/components/block/DockedStationServices.vue";
 import Commander from "@/components/block/Commander.vue";
 import Message from "@/components/block/Message.vue";
+import MissionsActive from "@/components/block/MissionsActive.vue";
+import MissionsComplete from "@/components/block/MissionsComplete.vue";
 import Ranks from "@/components/block/Ranks.vue";
 import gameStore from "@/store/main/game";
 import systemStore from "@/store/main/system";
@@ -56,7 +58,9 @@ export default defineComponent({
     Combat,
     Exploration,
     Mining,
-    Station
+    Station,
+    MissionsActive,
+    MissionsComplete
   },
   setup() {
     const dockedStation = ref(systemStore.state.dockedStation !== undefined);
@@ -94,7 +98,7 @@ body {
   grid-template-rows: repeat(2, 1fr) 2fr;
   grid-template-areas:
     "ranks ranks ranks reputations reputations actions"
-    "commander system docked-station docked-station-services ship message"
+    "commander system missions-active missions-complete ship message"
     "mode mode mode mode mode mode";
   align-items: center;
   justify-items: center;
