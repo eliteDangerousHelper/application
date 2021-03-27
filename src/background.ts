@@ -7,6 +7,8 @@ import { fetchOptions, writeConfig } from "@/utils/background/options";
 import gameStore from "@/store/background/game";
 import { getCommodities } from "@/utils/background/market";
 import { initializeJournal, journalObserver } from "@/utils/background/journal";
+import { EventED } from "./interfaces/events/base";
+import { writeFileSync } from "original-fs";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -29,6 +31,14 @@ ipcMain.on("fetch-options", event => {
   fetchOptions().then(options => {
     event.reply("fetch-options-end", options);
   });
+});
+
+ipcMain.on("unparse-event", (event, e: EventED) => {
+  if (isDevelopment) {
+    writeFileSync("./unparsed-event.jsonl", JSON.stringify(e), {
+      flag: "a"
+    });
+  }
 });
 
 initializeJournal();

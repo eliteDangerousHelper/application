@@ -2,6 +2,7 @@ import { EventED } from "@/interfaces/events/base";
 import * as startup from "./events/startup";
 import * as travel from "./events/travel";
 import * as stationService from "./events/stationService";
+import { ipcRenderer } from "electron";
 
 const eventFunction: { [name: string]: Function } = {
   FileHeader: startup.fileheader,
@@ -26,9 +27,15 @@ const eventFunction: { [name: string]: Function } = {
   MissionAbandoned: stationService.missionAbandoned,
 };
 
+const ignoredEvent: string[] = [
+  "Music"
+]
+
 export const parse = (event: EventED) => {
   if (eventFunction[event.event] !== undefined) {
     eventFunction[event.event](event);
+  } else if (ignoredEvent.indexOf(event.event) !== -1) {
+    ipcRenderer.emit("unparse-event", event);
   }
 };
 
