@@ -25,10 +25,12 @@ const eventFunction: { [name: string]: Function } = {
   MissionAccepted: stationService.missionAccepted,
   MissionCompleted: stationService.missionCompleted,
   MissionAbandoned: stationService.missionAbandoned,
+  MissionFailed: stationService.missionFailed,
 };
 
 const ignoredEvent: string[] = [
-  "Music"
+  "Music",
+  "SendText"
 ]
 
 export const parse = (event: EventED) => {

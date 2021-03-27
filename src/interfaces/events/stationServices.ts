@@ -60,3 +60,8 @@ export interface MissionCompleted extends EventED {
   Faction: string;
   Reward: number;
 }
+
+export interface MissionFailed extends EventED {
+  Name: string;
+  MissionID: number;
+}

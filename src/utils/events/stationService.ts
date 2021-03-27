@@ -1,4 +1,4 @@
-import { MissionAccepted, MissionCompleted, MissionAbandoned } from "@/interfaces/events/stationServices";
+import { MissionAccepted, MissionCompleted, MissionAbandoned, MissionFailed } from "@/interfaces/events/stationServices";
 import MissionsStore from "@/store/main/missions";
 
 const { ipcRenderer } = window.require("electron");
@@ -30,6 +30,15 @@ export const missionAbandoned = (event: MissionAbandoned) => {
   const mission = MissionsStore.state.active.find((mission) => mission.id == event.MissionID)
 
   if (mission) {
+    MissionsStore.state.active = MissionsStore.state.active.filter((mission) => mission.id !== event.MissionID)
+  }
+}
+
+export const missionFailed = (event: MissionFailed) => {
+  const mission = MissionsStore.state.active.find((mission) => mission.id == event.MissionID)
+
+  if (mission) {
+    MissionsStore.state.failed.push(mission);
     MissionsStore.state.active = MissionsStore.state.active.filter((mission) => mission.id !== event.MissionID)
   }
 }
