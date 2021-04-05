@@ -1,5 +1,5 @@
 <template>
-  <div v-if="true" class="main">
+  <div v-if="launch" class="main">
     <Ranks></Ranks>
     <Reputations></Reputations>
     <Actions></Actions>
