@@ -1,11 +1,13 @@
 <template>
   <div class="window5 actions">
     <Button @click="openOptions">options</Button>
-    <Modal v-if="showOptions" @close="closeOptions">
-      <template v-slot:default>
-        <Options></Options>
-      </template>
-    </Modal>
+    <transition name="no-mode-fade">
+      <Modal v-if="showOptions" @close="closeOptions">
+        <template v-slot:default>
+          <Options></Options>
+        </template>
+      </Modal>
+    </transition>
   </div>
 </template>
 
@@ -53,6 +55,16 @@ export default defineComponent({
 .item {
   margin-right: 40px;
   margin-top: 15px;
+}
+
+.no-mode-fade-enter-active,
+.no-mode-fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.no-mode-fade-enter-from,
+.no-mode-fade-leave-to {
+  opacity: 0;
 }
 </style>
 

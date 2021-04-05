@@ -1,20 +1,22 @@
 <template>
-  <div v-if="launch" class="main">
-    <Ranks></Ranks>
-    <Reputations></Reputations>
-    <Actions></Actions>
-    <Commander></Commander>
-    <System></System>
-    <MissionsActive></MissionsActive>
-    <MissionsComplete></MissionsComplete>
-    <Ship></Ship>
-    <Message></Message>
-    <component :is="mode"></component>
-  </div>
-  <div v-else class="main-waiting">
-    <Loader></Loader>
-    <Actions></Actions>
-  </div>
+  <transition name="no-mode-fade">
+    <div v-if="launch" class="main">
+      <Ranks></Ranks>
+      <Reputations></Reputations>
+      <Actions></Actions>
+      <Commander></Commander>
+      <System></System>
+      <MissionsActive></MissionsActive>
+      <MissionsComplete></MissionsComplete>
+      <Ship></Ship>
+      <Message></Message>
+      <component :is="mode"></component>
+    </div>
+    <div v-else class="main-waiting">
+      <Loader></Loader>
+      <Actions></Actions>
+    </div>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -165,5 +167,17 @@ body {
   height: 112px;
   padding: 60px 62px 50px 65px;
   position: relative;
+}
+</style>
+
+<style lang="scss" scoped>
+.no-mode-fade-enter-active,
+.no-mode-fade-leave-active {
+  transition: opacity 1.5s;
+}
+
+.no-mode-fade-enter-from,
+.no-mode-fade-leave-to {
+  opacity: 0;
 }
 </style>
