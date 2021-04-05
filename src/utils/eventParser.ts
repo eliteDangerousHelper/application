@@ -30,7 +30,8 @@ const eventFunction: { [name: string]: Function } = {
 
 const ignoredEvent: string[] = [
   "Music",
-  "SendText"
+  "SendText",
+  "Friends"
 ]
 
 export const parse = (event: EventED) => {
