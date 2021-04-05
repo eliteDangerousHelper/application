@@ -8,9 +8,12 @@ import gameStore from "@/store/background/game";
 import { getCommodities } from "@/utils/background/market";
 import { initializeJournal, journalObserver } from "@/utils/background/journal";
 import { EventED } from "./interfaces/events/base";
-import { writeFileSync } from "original-fs";
+import { writeFile } from "original-fs";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
+const logFile = "./log.log";
+const unparsedEventLogFile = "./unparsed-event.jsonl";
+const NEW_LINE = "\r\n";
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -35,8 +38,10 @@ ipcMain.on("fetch-options", event => {
 
 ipcMain.on("unparse-event", (event, e: EventED) => {
   if (isDevelopment) {
-    writeFileSync("./unparsed-event.jsonl", JSON.stringify(e), {
-      flag: "a"
+    writeFile(unparsedEventLogFile, JSON.stringify(e), { flag: "a" }, err => {
+      if (err) {
+        console.error(err);
+      }
     });
   }
 });
@@ -87,7 +92,16 @@ async function createWindow() {
 
     for (const line of lines) {
       if (line !== "") {
-        win.webContents.send("new-event", JSON.parse(line));
+        const event = JSON.parse(line) as EventED;
+        if (isDevelopment) {
+          const toWrite = `event : ${event.event} parsed ${NEW_LINE}`;
+          writeFile(logFile, toWrite, { flag: "a" }, err => {
+            if (err) {
+              console.error(err);
+            }
+          })
+        }
+        win.webContents.send("new-event", event);
       }
     }
   });
