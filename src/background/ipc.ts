@@ -7,7 +7,7 @@ import { EventED } from "@/types/events/base";
 import { writeFile } from "fs";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
-const unparsedEventLogFile = "../unparsed-event.jsonl";
+const unparsedEventLogFile = __dirname + "../../unparsed-event.jsonl";
 
 ipcMain.on("write-config", (event, arg: string) => {
   writeConfig(JSON.parse(arg));
@@ -27,6 +27,7 @@ ipcMain.on("fetch-options", event => {
 
 ipcMain.on("unparse-event", (event, e: EventED) => {
   if (isDevelopment) {
+    console.error(`[${new Date().toLocaleString()}] Unparsed Event: ${e.event}`)
     writeFile(unparsedEventLogFile, JSON.stringify(e), { flag: "a" }, err => {
       if (err) {
         console.error(err);
