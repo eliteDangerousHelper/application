@@ -3,7 +3,17 @@
 import { app, protocol, BrowserWindow } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS3_DEVTOOLS } from "electron-devtools-installer";
+import { ipcMainWithWin } from "@/background/ipc";
+import { initializeJournal } from "./background/dataReader/journal";
+import emmiter from "@/background/utils/eventUtils";
+import { writeFile } from "original-fs";
+import { EventED } from "@/types/events/base";
+
 const isDevelopment = process.env.NODE_ENV !== "production";
+const logFile = "./event.log";
+const NEW_LINE = "\r\n";
+
+initializeJournal();
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -18,16 +28,38 @@ async function createWindow() {
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: process.env
-        .ELECTRON_NODE_INTEGRATION as unknown as boolean,
-      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      nodeIntegration: true
     },
   });
+
+  ipcMainWithWin(win);
+
+  emmiter.on("file-updated", (log: { file: string, message: string }) => {
+    const lines = log.message.split(/\r?\n/);
+
+    for (const line of lines) {
+      if (line !== "") {
+        const event = JSON.parse(line) as EventED;
+        if (isDevelopment) {
+          const toWrite = `event : ${event.event} parsed ${NEW_LINE}`;
+          writeFile(logFile, toWrite, { flag: "a" }, err => {
+            if (err) {
+              console.error(err);
+            }
+          })
+        }
+        win.webContents.send("new-event", event);
+      }
+    }
+  })
+
+  win.setMenu(null);
+  win.maximize();
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string);
-    if (!process.env.IS_TEST) win.webContents.openDevTools();
+    if (!process.env.IS_TEST) win.webContents.openDevTools({ mode: "detach" });
   } else {
     createProtocol("app");
     // Load the index.html when not in development
@@ -58,7 +90,7 @@ app.on("ready", async () => {
     // Install Vue Devtools
     try {
       await installExtension(VUEJS3_DEVTOOLS);
-    } catch (e) {
+    } catch (e: any) {
       console.error("Vue Devtools failed to install:", e.toString());
     }
   }
