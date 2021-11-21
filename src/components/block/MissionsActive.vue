@@ -17,7 +17,6 @@ export default defineComponent({
   name: "missionsActive",
   setup() {
     const missions = missionsStore.getActiveMissions;
-    console.log(missions);
 
     return {
       missions

@@ -131,8 +131,6 @@ export const shutdown = () => {
 };
 
 export const progress = (event: Progress) => {
-  console.log(event);
-
   rankStore.state.CQC.percent = event.CQC;
   rankStore.state.Combat.percent = event.Combat;
   rankStore.state.Empire.percent = event.Empire;

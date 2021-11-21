@@ -38,7 +38,7 @@ const ignoredEvent: string[] = [
 export const parse = (event: EventED) => {
   if (eventFunction[event.event] !== undefined) {
     eventFunction[event.event](event);
-  } else if (ignoredEvent.indexOf(event.event) !== -1) {
+  } else if (ignoredEvent.indexOf(event.event) === -1) {
     console.error("unparse-event", event);
     ipcRenderer.emit("unparse-event", event);
   }
