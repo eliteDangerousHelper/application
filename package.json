@@ -14,6 +14,7 @@
   "main": "background.js",
   "dependencies": {
     "core-js": "^3.6.5",
+    "normalize.css": "^8.0.1",
     "read-last-lines-ts": "^1.2.1",
     "vue": "^3.0.0"
   },

@@ -3,6 +3,7 @@ import App from "./App.vue";
 import parse from "./utils/eventParser";
 import { EventED } from "@/types/events/base";
 import { IpcRendererEvent } from "electron";
+import "normalize.css";
 
 const { ipcRenderer } = window.require("electron");
 
