@@ -1,5 +1,6 @@
 import { MissionAccepted, MissionCompleted, MissionAbandoned, MissionFailed } from "@/types/events/stationServices";
 import MissionsStore from "@/store/missions";
+import CommanderStore from "@/store/commander";
 
 const { ipcRenderer } = window.require("electron");
 
@@ -19,6 +20,7 @@ export const missionAccepted = (event: MissionAccepted) => {
 
 export const missionCompleted = (event: MissionCompleted) => {
   const mission = MissionsStore.state.active.find((mission) => mission.id == event.MissionID)
+  CommanderStore.state.credit += event.Reward;
 
   if (mission) {
     MissionsStore.state.complete.push(mission);
