@@ -14,7 +14,7 @@ export default defineComponent({
   name: "DockedStationServices",
   setup() {
     const services = computed(() =>
-      systemStore.state.actual.dockedStation?.services.slice(0, 9)
+      systemStore.state.actual.dockedStation?.services ? systemStore.state.actual.dockedStation?.services.slice(0, 9) : ""
     );
     return {
       services,
