@@ -13,6 +13,16 @@ interface Material {
   percent: number;
 }
 
+export interface ApproachSettlement extends EventED {
+  BodyID: number;
+  BodyName: string;
+  Latitude: number;
+  Longitude: number;
+  MarketID: number;
+  Name: string;
+  SystemAddress: number;
+}
+
 export interface Scan extends EventED {
   Bodyname: string;
   DistanceFromArrivalLS: number;

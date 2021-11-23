@@ -6,7 +6,7 @@ import * as stationService from "@/events/stationService";
 const { ipcRenderer } = window.require("electron");
 
 const eventFunction: { [name: string]: (event: any) => void } = {
-  FileHeader: startup.fileheader,
+  Fileheader: startup.fileheader,
   Progress: startup.progress,
   Shutdown: startup.shutdown,
   Rank: startup.rank,
@@ -40,7 +40,7 @@ export const parse = (event: EventED) => {
     eventFunction[event.event](event);
   } else if (ignoredEvent.indexOf(event.event) === -1) {
     console.error("unparse-event", event);
-    ipcRenderer.emit("unparse-event", event);
+    ipcRenderer.send("unparse-event", event);
   }
 };
 

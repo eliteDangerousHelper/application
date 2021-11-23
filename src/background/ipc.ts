@@ -5,9 +5,11 @@ import configStore from "@/background/store/config";
 import { initializeJournal } from "./dataReader/journal";
 import { EventED } from "@/types/events/base";
 import { writeFile } from "fs";
+import { join } from "path";
+import { EOL } from "os";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
-const unparsedEventLogFile = __dirname + "../../unparsed-event.jsonl";
+const unparsedEventLogFile = join(__dirname, "..", "unparsed-event.jsonl");
 
 ipcMain.on("write-config", (event, arg: string) => {
   writeConfig(JSON.parse(arg));
@@ -27,8 +29,8 @@ ipcMain.on("fetch-options", event => {
 
 ipcMain.on("unparse-event", (event, e: EventED) => {
   if (isDevelopment) {
-    console.error(`[${new Date().toLocaleString()}] Unparsed Event: ${e.event}`)
-    writeFile(unparsedEventLogFile, JSON.stringify(e), { flag: "a" }, err => {
+    console.error(`[${new Date().toLocaleString()}] Unparsed Event: ${e.event}`);
+    writeFile(unparsedEventLogFile, JSON.stringify(e) + EOL, { flag: "a" }, err => {
       if (err) {
         console.error(err);
       }
