@@ -19,7 +19,7 @@ export default defineComponent({
   setup() {
     const system = computed(() => systemStore.state);
     const population = computed(() =>
-      new Intl.NumberFormat().format(systemStore.state.population)
+      new Intl.NumberFormat().format(systemStore.state.actual.population)
     );
     return {
       system,

@@ -65,7 +65,7 @@ export default defineComponent({
     MissionsComplete
   },
   setup() {
-    const dockedStation = ref(systemStore.state.dockedStation !== undefined);
+    const dockedStation = ref(systemStore.state.actual.dockedStation !== undefined);
     const launch = computed(() => gameStore.state.launch);
     const span = ref(6);
     const mode = computed(() => gameStore.state.gameMode);

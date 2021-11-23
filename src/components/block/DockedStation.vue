@@ -19,7 +19,7 @@ import systemStore from "@/store/system";
 export default defineComponent({
   name: "DockedStation",
   setup() {
-    const station = computed(() => systemStore.state.dockedStation);
+    const station = computed(() => systemStore.state.actual.dockedStation);
     return {
       station,
     };

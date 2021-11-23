@@ -79,14 +79,28 @@ export interface DockingDenied extends EventED {
 export interface DockingGranted extends EventED {
   StationName: string;
   LandingPad: number;
+  MarketID: number;
+  StationType: string;
 }
 
 export interface DockingRequested extends EventED {
   StationName: string;
+  MarketID: number;
+  StationType: string;
+  LandingPads: {
+    Small: number;
+    Medium: number;
+    Large: number;
+  }
 }
 
 export interface DockingTimeout extends EventED {
   StationName: string;
+}
+
+export interface FuelScoop extends EventED {
+  Scooped: number;
+  Total: number;
 }
 
 export interface FSDJump extends EventED {
@@ -109,6 +123,13 @@ export interface FSDJump extends EventED {
   JumpDist: number;
   FuelUsed: number;
   FuelLevel: number;
+}
+
+export interface FSDTarget extends EventED {
+  Name: string;
+  SystemAddress: number;
+  StarClass: string;
+  RemainingJumpsInRoute: number;
 }
 
 export interface Liftoff extends EventED {
@@ -155,8 +176,19 @@ export interface Location extends EventED {
   Conflicts: Conflict[];
 }
 
+export interface StartJump extends EventED {
+  JumpType: string;
+  StarSystem: string;
+  SystemAddress: number;
+  StarClass: string;
+}
+
 export interface SupercruiseEntry extends EventED {
   Starsystem: string;
+  Taxi: boolean;
+  Multicrew: boolean;
+  StarSystem: string;
+  SystemAddress: number;
 }
 
 export interface SupercruiseExit extends EventED {
