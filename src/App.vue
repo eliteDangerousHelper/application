@@ -10,7 +10,11 @@
       <MissionsComplete></MissionsComplete>
       <Ship></Ship>
       <Message></Message>
-      <component :is="mode"></component>
+      <div class="window mode">
+        <div class="content">
+          <component :is="mode"></component>
+        </div>
+      </div>
     </div>
     <div v-else class="main-waiting">
       <Loader></Loader>
@@ -100,8 +104,9 @@ body {
   grid-template-rows: repeat(2, 1fr) 2fr;
   grid-template-areas:
     "ranks ranks ranks reputations reputations actions"
-    "commander system missions-active missions-complete ship message"
-    "mode mode mode mode mode mode";
+    "commander mode mode mode mode  message"
+    "system mode mode mode mode missions-complete"
+    "missions-active mode mode mode mode ship";
   align-items: center;
   justify-items: center;
   height: 100vh;
@@ -147,6 +152,7 @@ body {
   height: 140px;
   padding: 60px 30px 0 50px;
   position: relative;
+  z-index: 20;
 }
 
 .window2 {
@@ -167,6 +173,24 @@ body {
   height: 112px;
   padding: 60px 62px 50px 65px;
   position: relative;
+}
+
+.mode {
+  grid-area: mode;
+  background-image: url("./assets/ui/window5.png");
+  padding: 0 35px 42px 50px;
+  background-image: url(/img/window5.dd2d3f28.png);
+  width: 1450px;
+  height: 900px;
+  top: -95px;
+  z-index: 10;
+
+  .content {
+    position: relative;
+    top: 255px;
+    left: 215px;
+    width: 69%;
+  }
 }
 </style>
 

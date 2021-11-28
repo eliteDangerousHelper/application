@@ -91,6 +91,7 @@ export default defineComponent({
   width: 467px;
   height: 110px;
   position: relative;
+  z-index: 20;
 
   .image {
     position: absolute;
