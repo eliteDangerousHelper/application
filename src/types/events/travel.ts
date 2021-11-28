@@ -103,6 +103,11 @@ export interface FuelScoop extends EventED {
   Total: number;
 }
 
+export interface ReservoirReplenished extends EventED {
+  FuelMain: number;
+  FuelReservoir : number;
+}
+
 export interface FSDJump extends EventED {
   StarSystem: string;
   SystemAddress: number;

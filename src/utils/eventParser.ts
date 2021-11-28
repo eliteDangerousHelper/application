@@ -3,6 +3,7 @@ import * as startup from "@/events/startup";
 import * as travel from "@/events/travel";
 import * as stationService from "@/events/stationService";
 import * as other from "@/events/other";
+import * as exploration from "@/events/exploration";
 
 const { ipcRenderer } = window.require("electron");
 
@@ -32,7 +33,10 @@ const eventFunction: { [name: string]: (event: any) => void } = {
   ReceiveText: other.receiveText,
   StartJump: travel.startJump,
   FuelScoop: travel.fuelScoop,
-  DockingRequested: travel.dockingRequested
+  DockingRequested: travel.dockingRequested,
+  MultiSellExplorationData: exploration.multiSellExplorationData,
+  RefuelAll: stationService.refuelAll,
+  ShipyardSell: stationService.shipyardSell,
 };
 
 const ignoredEvent: string[] = [

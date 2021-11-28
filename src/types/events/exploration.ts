@@ -49,6 +49,18 @@ export interface MaterialCollected extends EventED {
   Count: number;
 }
 
+interface SystemDiscovered {
+  "SystemName": string;
+  "NumBodies": number;
+}
+
+export interface MultiSellExplorationData extends EventED {
+  Discovered: SystemDiscovered[];
+  BaseValue: number;
+  Bonus: number;
+  TotalEarnings: number;
+}
+
 export interface MaterialDiscarded extends EventED {
   Category: "Raw" | "Encoded" | "Manufactured";
   Name: string;

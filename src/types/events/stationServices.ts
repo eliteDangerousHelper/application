@@ -54,6 +54,21 @@ export interface MissionAccepted extends EventED {
   Reward: number;
 }
 
+export interface RefuelAll extends EventED {
+  Cost: number;
+  Amount: number;
+}
+
+export interface ShipyardSell extends EventED {
+  ShipType: string;
+  ShipType_Localised: string;
+  SellShipID: number;
+  ShipPrice: number;
+  System: string;
+  ShipMarketID: number;
+  MarketID: number;
+}
+
 export interface MissionCompleted extends EventED {
   Name: string;
   MissionID: number;

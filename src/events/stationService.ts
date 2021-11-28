@@ -1,6 +1,7 @@
-import { MissionAccepted, MissionCompleted, MissionAbandoned, MissionFailed } from "@/types/events/stationServices";
+import { MissionAccepted, MissionCompleted, MissionAbandoned, MissionFailed, RefuelAll, ShipyardSell } from "@/types/events/stationServices";
 import MissionsStore from "@/store/missions";
 import CommanderStore from "@/store/commander";
+import ShipStore from "@/store/ship";
 
 const { ipcRenderer } = window.require("electron");
 
@@ -43,4 +44,13 @@ export const missionFailed = (event: MissionFailed) => {
     MissionsStore.state.failed.push(mission);
     MissionsStore.state.active = MissionsStore.state.active.filter((mission) => mission.id !== event.MissionID)
   }
+}
+
+export const refuelAll = (event: RefuelAll) => {
+  CommanderStore.state.credit -= event.Cost
+  ShipStore.state.fuel.capacity = ShipStore.state.fuel.level
+}
+
+export const shipyardSell = (event: ShipyardSell) => {
+  CommanderStore.state.credit += event.ShipPrice
 }

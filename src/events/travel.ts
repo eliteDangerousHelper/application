@@ -1,4 +1,4 @@
-import { Cargo, Docked, DockingRequested, FSDJump, FSDTarget, FuelScoop, Location, StartJump, Undocked } from "@/types/events/travel";
+import { Cargo, Docked, DockingRequested, FSDJump, FSDTarget, FuelScoop, Location, ReservoirReplenished, StartJump, Undocked } from "@/types/events/travel";
 import systemStore from "@/store/system";
 import gameStore from "@/store/game";
 import marketStore from "@/store/market";
@@ -88,6 +88,10 @@ export const cargo = (event: Cargo) => {
 
 export const fuelScoop = (event: FuelScoop) => {
   ship.state.fuel.level = event.Total
+}
+
+export const reservoirReplenished = (event: ReservoirReplenished) => {
+  ship.state.fuel.capacity = event.FuelMain
 }
 
 export const startJump = (event: StartJump) => {
